@@ -4,10 +4,10 @@
  */
 export const SAMPLE_SERVERS: readonly string[] = [
   'mc.hypixel.net',
-  'gommehd.net',
+  'wynncraft.com',
   '2b2t.org',
-  'play.cubecraft.net',
-  'wynncraft.com'
+  'mc-auth.com',
+  'visit.uncensoredlibrary.com',
 ];
 
 export function pickRandomSampleServer(): string {
