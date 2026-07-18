@@ -50,8 +50,7 @@
       autocomplete="off"
       autocapitalize="off"
       spellcheck="false"
-      maxlength="16"
-      placeholder="Minecraft username…"
+      placeholder="Minecraft username or UUID…"
       bind:value={draft}
       oninput={scheduleCommit}
       onchange={commit}
