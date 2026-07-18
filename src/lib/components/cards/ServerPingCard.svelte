@@ -5,7 +5,7 @@
   import SampleServerChips from '$lib/components/SampleServerChips.svelte';
   import { parseHostInput } from '$lib/host-input';
   import ShowcaseCard from '$lib/components/ShowcaseCard.svelte';
-  import { pickRandomSampleServer } from '$lib/data/sample-servers';
+  import { initialSampleServer } from '$lib/data/sample-servers';
   import { parseMotd, stripLegacyCodes } from '$lib/motd';
 
   interface PingResult {
@@ -22,7 +22,7 @@
   let hostInput = $state('');
 
   onMount(() => {
-    hostInput = pickRandomSampleServer();
+    hostInput = initialSampleServer();
   });
 
   // One input handles "host", "host:port" and (bracketed) IPv6; the port

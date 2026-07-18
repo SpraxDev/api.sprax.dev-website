@@ -4,12 +4,12 @@
   import DebouncedTextInput from '$lib/components/DebouncedTextInput.svelte';
   import SampleServerChips from '$lib/components/SampleServerChips.svelte';
   import ShowcaseCard from '$lib/components/ShowcaseCard.svelte';
-  import { pickRandomSampleServer } from '$lib/data/sample-servers';
+  import { initialSampleServer } from '$lib/data/sample-servers';
 
   let host = $state('');
 
   onMount(() => {
-    host = pickRandomSampleServer();
+    host = initialSampleServer();
   });
 
   async function checkBlocklist(hostname: string): Promise<Record<string, boolean>> {

@@ -13,3 +13,14 @@ export const SAMPLE_SERVERS: readonly string[] = [
 export function pickRandomSampleServer(): string {
   return SAMPLE_SERVERS[Math.floor(Math.random() * SAMPLE_SERVERS.length)];
 }
+
+let initialPick: string | undefined;
+
+/**
+ * The random sample server picked once per page load — the ping and
+ * blocklist cards share it so they both start on the same server.
+ */
+export function initialSampleServer(): string {
+  initialPick ??= pickRandomSampleServer();
+  return initialPick;
+}
