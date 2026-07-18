@@ -2,9 +2,10 @@
   import { onMount } from 'svelte';
   import { serverPingUrl } from '$lib/api';
   import DebouncedTextInput from '$lib/components/DebouncedTextInput.svelte';
+  import SampleServerChips from '$lib/components/SampleServerChips.svelte';
   import { parseHostInput } from '$lib/host-input';
   import ShowcaseCard from '$lib/components/ShowcaseCard.svelte';
-  import { SAMPLE_SERVERS, pickRandomSampleServer } from '$lib/data/sample-servers';
+  import { pickRandomSampleServer } from '$lib/data/sample-servers';
   import { parseMotd, stripLegacyCodes } from '$lib/motd';
 
   interface PingResult {
@@ -60,17 +61,7 @@
       placeholder="mc.example.org[:25565]"
     />
 
-    <div class="samples" role="group" aria-label="Sample servers">
-      {#each SAMPLE_SERVERS as sample (sample)}
-        <button
-          type="button"
-          class={['chip', { active: sample === hostInput }]}
-          onclick={() => (hostInput = sample)}
-        >
-          {sample}
-        </button>
-      {/each}
-    </div>
+    <SampleServerChips bind:value={hostInput} />
 
     {#if request === null}
       {@render skeleton()}
@@ -133,36 +124,6 @@
     flex-direction: column;
     gap: var(--space-3);
     width: 100%;
-  }
-
-  .samples {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-1);
-  }
-
-  .chip {
-    background: none;
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius);
-    padding: 2px var(--space-2);
-    font-family: var(--font-mono);
-    font-size: var(--text-xs);
-    color: var(--color-text-faint);
-    cursor: pointer;
-    transition:
-      border-color 0.15s,
-      color 0.15s;
-  }
-
-  .chip:hover {
-    border-color: var(--color-accent);
-    color: var(--color-accent);
-  }
-
-  .chip.active {
-    border-color: var(--color-border-strong);
-    color: var(--color-text-muted);
   }
 
   .result {
