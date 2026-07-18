@@ -50,9 +50,9 @@
     <span class="wordmark"><span class="block" aria-hidden="true"></span>SPRAX API</span>
     <nav aria-label="Quick links">
       <a href={resolve('/docs')}>Docs</a>
-      <a href="https://github.com/SpraxDev/api.sprax.dev">GitHub</a>
-      <a href="https://status.sprax.dev/">Status</a>
-      <a href="https://sprax.me/discord">Discord</a>
+      <a href="https://github.com/SpraxDev/api.sprax.dev" target="_blank" rel="noopener noreferrer">GitHub</a>
+      <a href="https://status.sprax.dev/" target="_blank" rel="noopener noreferrer">Status</a>
+      <a href="https://sprax.me/discord" target="_blank" rel="noopener noreferrer">Discord</a>
     </nav>
   </header>
 
