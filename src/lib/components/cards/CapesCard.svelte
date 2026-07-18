@@ -4,7 +4,7 @@
   import CapePreview from './CapePreview.svelte';
 </script>
 
-<ShowcaseCard title="Capes">
+<ShowcaseCard>
   <div class="providers">
     {#each CAPE_TYPES as type (type)}
       <CapePreview {type} />

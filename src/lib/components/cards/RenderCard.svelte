@@ -3,7 +3,7 @@
   import ShowcaseCard from '$lib/components/ShowcaseCard.svelte';
   import { username } from '$lib/state/username.svelte';
 
-  type Variant = 'head' | 'body' | 'skin' | 'body3d';
+  type Variant = 'head' | 'body' | 'skin' | 'body3d' | 'head3d';
 
   let { variant, title }: { variant: Variant; title: string } = $props();
 
@@ -50,6 +50,14 @@
           height: 234,
           pixelated: false,
           alt: `3D Minecraft body render of ${user}`
+        };
+      case 'head3d':
+        return {
+          url: skin3dRenderUrl(user, 'head', 128),
+          width: 138,
+          height: 128,
+          pixelated: false,
+          alt: `3D Minecraft head render of ${user}`
         };
     }
   });

@@ -66,7 +66,7 @@
     color: var(--color-accent-strong);
     margin: 0;
     white-space: pre-wrap;
-    word-break: break-all;
+    overflow-wrap: anywhere;
   }
 
   pre.expanded {

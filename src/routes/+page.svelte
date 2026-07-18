@@ -59,15 +59,24 @@
   <main>
     <Hero />
 
+    <h2 class="section-label"><span class="square" aria-hidden="true"></span>Player skin</h2>
+    <section class="showcase skins" aria-label="Skin endpoint previews">
+      <RenderCard variant="skin" title="Raw skin" />
+      <RenderCard variant="body" title="Skin render" />
+      <RenderCard variant="body3d" title="3D skin render" />
+      <RenderCard variant="head" title="Head render" />
+      <RenderCard variant="head3d" title="3D head render" />
+    </section>
+
     <h2 class="section-label"><span class="square" aria-hidden="true"></span>Player data</h2>
-    <section class="showcase players" aria-label="Player endpoint previews">
+    <section class="showcase data" aria-label="Player data previews">
       <UuidCard />
       <ProfileCard />
-      <RenderCard variant="head" title="Head render" />
-      <RenderCard variant="body" title="Body render" />
-      <RenderCard variant="body3d" title="3D render" />
-      <RenderCard variant="skin" title="Raw skin" />
-      <div class="wide"><CapesCard /></div>
+    </section>
+
+    <h2 class="section-label"><span class="square" aria-hidden="true"></span>Capes</h2>
+    <section class="showcase capes" aria-label="Cape previews">
+      <CapesCard />
     </section>
 
     <h2 class="section-label"><span class="square" aria-hidden="true"></span>Skin by URL</h2>
@@ -190,20 +199,18 @@
     align-items: stretch;
   }
 
-  .showcase.players {
-    grid-template-columns: repeat(auto-fit, minmax(min(16rem, 100%), 1fr));
+  /* min 18rem → three columns on desktop, so the five skin cards fall into
+     the intended 3 + 2 rows */
+  .showcase.skins {
+    grid-template-columns: repeat(auto-fit, minmax(min(18rem, 100%), 1fr));
   }
 
+  .showcase.data,
   .showcase.servers {
     grid-template-columns: repeat(auto-fit, minmax(min(22rem, 100%), 1fr));
   }
 
   .showcase.xurl {
     grid-template-columns: minmax(min(22rem, 100%), 36rem);
-  }
-
-  .wide {
-    grid-column: 1 / -1;
-    display: grid;
   }
 </style>

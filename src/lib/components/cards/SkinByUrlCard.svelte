@@ -18,7 +18,7 @@
   const status = $derived(url === loadedUrl ? 'loaded' : url === failedUrl ? 'failed' : 'loading');
 </script>
 
-<ShowcaseCard title="Skin by URL" {url}>
+<ShowcaseCard {url}>
   <div class="body">
     <DebouncedTextInput
       bind:value={textureUrl}

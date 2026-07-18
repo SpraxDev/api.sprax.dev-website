@@ -2,11 +2,13 @@
   import type { Snippet } from 'svelte';
   import RequestUrl from './RequestUrl.svelte';
 
-  let { title, url, children }: { title: string; url?: string; children: Snippet } = $props();
+  let { title, url, children }: { title?: string; url?: string; children: Snippet } = $props();
 </script>
 
 <article class="card">
-  <h3>{title}</h3>
+  {#if title != null}
+    <h3>{title}</h3>
+  {/if}
   <div class="preview">
     {@render children()}
   </div>

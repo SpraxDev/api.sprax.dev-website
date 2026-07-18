@@ -46,7 +46,7 @@
     margin: 0;
     max-width: 100%;
     white-space: pre-wrap;
-    word-break: break-all;
+    overflow-wrap: anywhere;
   }
 
   .skeleton {
