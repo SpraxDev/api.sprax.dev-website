@@ -124,6 +124,9 @@
     flex-direction: column;
     gap: var(--space-3);
     width: 100%;
+    /* Top-align so the input lines up with the neighboring card's when the
+       grid row is stretched by taller content */
+    align-self: stretch;
   }
 
   .result {

@@ -105,6 +105,7 @@
     flex-direction: column;
     gap: var(--space-3);
     width: 100%;
+    align-self: stretch;
   }
 
   .frame {
