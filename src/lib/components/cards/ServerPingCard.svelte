@@ -18,13 +18,18 @@
   }
 
   let host = $state('');
+  let port = $state<number | undefined>(undefined);
 
   onMount(() => {
     host = pickRandomSampleServer();
   });
 
-  async function pingServer(hostname: string): Promise<PingResult> {
-    const response = await fetch(serverPingUrl(hostname));
+  function parsePort(value: number): number | undefined {
+    return Number.isFinite(value) && value >= 1 && value <= 65535 ? Math.round(value) : undefined;
+  }
+
+  async function pingServer(hostname: string, portNumber?: number): Promise<PingResult> {
+    const response = await fetch(serverPingUrl(hostname, portNumber));
     const body = await response.json();
     if (!response.ok) {
       throw new Error(typeof body.error === 'string' ? body.error : `HTTP ${response.status}`);
@@ -32,7 +37,7 @@
     return body;
   }
 
-  const request = $derived(host === '' ? null : pingServer(host));
+  const request = $derived(host === '' ? null : pingServer(host, port));
 </script>
 
 {#snippet skeleton()}
@@ -45,14 +50,29 @@
   </div>
 {/snippet}
 
-<ShowcaseCard title="Server ping" url={serverPingUrl(host)}>
+<ShowcaseCard title="Server ping" url={serverPingUrl(host, port)}>
   <div class="body">
-    <DebouncedTextInput
-      bind:value={host}
-      label="Server address to ping"
-      id="ping-host"
-      placeholder="mc.example.org"
-    />
+    <div class="input-row">
+      <div class="host">
+        <DebouncedTextInput
+          bind:value={host}
+          label="Server address to ping"
+          id="ping-host"
+          placeholder="mc.example.org"
+        />
+      </div>
+      <label class="visually-hidden" for="ping-port">Port (optional)</label>
+      <input
+        id="ping-port"
+        class="port"
+        type="number"
+        min="1"
+        max="65535"
+        placeholder="25565"
+        value={port ?? ''}
+        onchange={(event) => (port = parsePort(event.currentTarget.valueAsNumber))}
+      />
+    </div>
 
     <div class="samples" role="group" aria-label="Sample servers">
       {#each SAMPLE_SERVERS as sample (sample)}
@@ -127,6 +147,45 @@
     flex-direction: column;
     gap: var(--space-3);
     width: 100%;
+  }
+
+  .input-row {
+    display: flex;
+    gap: var(--space-2);
+  }
+
+  .host {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .port {
+    width: 6.5rem;
+    background: var(--color-bg);
+    border: 1px solid var(--color-border-strong);
+    border-radius: var(--radius);
+    padding: var(--space-2) var(--space-3);
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    transition: border-color 0.15s;
+  }
+
+  .port::placeholder {
+    color: var(--color-text-faint);
+  }
+
+  .port:hover,
+  .port:focus {
+    border-color: var(--color-accent);
+  }
+
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
   }
 
   .samples {

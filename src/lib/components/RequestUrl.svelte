@@ -38,7 +38,8 @@
     flex-shrink: 0;
   }
 
-  /* The full URL stays in the DOM — selectable, and scrollable to its end */
+  /* The full URL stays in the DOM — selectable, and scrollable to its end.
+     The scrollbar thumb only shows while hovering to keep the cards quiet. */
   code {
     color: var(--color-text-muted);
     overflow-x: auto;
@@ -46,6 +47,10 @@
     flex: 1;
     min-width: 0;
     scrollbar-width: thin;
+    scrollbar-color: transparent transparent;
+  }
+
+  .request:hover code {
     scrollbar-color: var(--color-border-strong) transparent;
   }
 

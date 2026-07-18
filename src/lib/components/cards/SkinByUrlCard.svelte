@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { skinByUrlRenderUrl } from '$lib/api';
+  import { skinByUrlRenderUrl, type SkinArea } from '$lib/api';
   import DebouncedTextInput from '$lib/components/DebouncedTextInput.svelte';
   import ShowcaseCard from '$lib/components/ShowcaseCard.svelte';
 
@@ -9,9 +9,25 @@
     'https://textures.minecraft.net/texture/cc69184e66d39fc1f5ed11a5e19e250a0561c289bf8bdb69362b11bc7fc659c1';
 
   let textureUrl = $state(DEFAULT_TEXTURE_URL);
+  let area = $state<SkinArea>('body');
+  let size = $state(128);
+  let overlay = $state(true);
+  let model = $state<'auto' | 'classic' | 'slim'>('auto');
+
+  function clampSize(value: number): number {
+    return Number.isFinite(value) ? Math.min(1024, Math.max(8, Math.round(value))) : 128;
+  }
 
   const isHttps = $derived(textureUrl.startsWith('https://'));
-  const url = $derived(skinByUrlRenderUrl('body', textureUrl, 128));
+  const url = $derived(
+    skinByUrlRenderUrl(area, textureUrl, {
+      size: clampSize(size),
+      overlay,
+      // The API rejects `slim` for head renders
+      slim: area === 'body' && model !== 'auto' ? model === 'slim' : undefined
+    })
+  );
+  const height = $derived(area === 'body' ? 256 : 128);
 
   let loadedUrl = $state<string | null>(null);
   let failedUrl = $state<string | null>(null);
@@ -27,16 +43,16 @@
       placeholder="https://textures.minecraft.net/texture/…"
     />
 
-    <div class="frame">
+    <div class="frame" style:min-height="{height}px">
       {#if !isHttps}
         <p class="error">The skin URL must start with https://</p>
       {:else}
         <img
           class={['pixelated', { hidden: status !== 'loaded' }]}
           src={url}
-          alt="Minecraft body render of the given skin texture"
+          alt="Minecraft {area} render of the given skin texture"
           width="128"
-          height="256"
+          {height}
           onload={() => (loadedUrl = url)}
           onerror={() => (failedUrl = url)}
         />
@@ -50,6 +66,37 @@
 
     <p class="hint">Renders any skin texture reachable over https — no profile needed.</p>
   </div>
+
+  {#snippet params()}
+    <label>
+      area
+      <select bind:value={area}>
+        <option value="body">body</option>
+        <option value="head">head</option>
+      </select>
+    </label>
+    <label>
+      size
+      <input
+        type="number"
+        min="8"
+        max="1024"
+        value={size}
+        onchange={(event) => (size = clampSize(event.currentTarget.valueAsNumber))}
+      />
+    </label>
+    <label><input type="checkbox" bind:checked={overlay} /> overlay</label>
+    {#if area === 'body'}
+      <label>
+        model
+        <select bind:value={model}>
+          <option value="auto">auto</option>
+          <option value="classic">classic</option>
+          <option value="slim">slim</option>
+        </select>
+      </label>
+    {/if}
+  {/snippet}
 </ShowcaseCard>
 
 <style>

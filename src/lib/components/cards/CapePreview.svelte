@@ -3,7 +3,7 @@
   import RequestUrl from '$lib/components/RequestUrl.svelte';
   import { username } from '$lib/state/username.svelte';
 
-  let { type }: { type: CapeType } = $props();
+  let { type, size = 100 }: { type: CapeType; size?: number } = $props();
 
   const LABELS: Record<CapeType, string> = {
     mojang: 'Mojang',
@@ -14,7 +14,7 @@
   // LabyMod capes are served as ready-to-display images and the /render
   // variant does not support them (HTTP 503) — use the raw endpoint there.
   const url = $derived(
-    type === 'labymod' ? capeUrl(type, username.value) : capeRenderUrl(type, username.value, 100)
+    type === 'labymod' ? capeUrl(type, username.value) : capeRenderUrl(type, username.value, size)
   );
 
   let loadedUrl = $state<string | null>(null);

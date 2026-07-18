@@ -7,6 +7,19 @@ export type CapeType = 'mojang' | 'optifine' | 'labymod';
 
 export const CAPE_TYPES: readonly CapeType[] = ['mojang', 'optifine', 'labymod'];
 
+/**
+ * Query parameters of the skin/render endpoints. API defaults (overlay on,
+ * auto-detected model, no download) are omitted from built URLs so the
+ * copyable URLs stay minimal.
+ */
+export interface RenderParams {
+  size?: number;
+  overlay?: boolean;
+  /** true = slim ("Alex") arms, false = classic ("Steve"); omit to auto-detect */
+  slim?: boolean;
+  download?: boolean;
+}
+
 export function uuidUrl(username: string): string {
   return `${API_BASE}/mc/v2/uuid/${encodeURIComponent(username)}`;
 }
@@ -17,20 +30,20 @@ export function profileUrl(user: string): string {
 
 // Skin endpoints use v1 — v2 does not officially exist for skins yet.
 // Switch to /mc/v2/skin/... once it ships.
-export function skinUrl(user: string): string {
-  return `${API_BASE}/mc/v1/skin/${encodeURIComponent(user)}`;
+export function skinUrl(user: string, params?: RenderParams): string {
+  return `${API_BASE}/mc/v1/skin/${encodeURIComponent(user)}${renderQuery(params)}`;
 }
 
-export function headRenderUrl(user: string, size?: number): string {
-  return withSize(`${API_BASE}/mc/v1/skin/${encodeURIComponent(user)}/head`, size);
+export function headRenderUrl(user: string, params?: RenderParams): string {
+  return `${API_BASE}/mc/v1/skin/${encodeURIComponent(user)}/head${renderQuery(params)}`;
 }
 
-export function bodyRenderUrl(user: string, size?: number): string {
-  return withSize(`${API_BASE}/mc/v1/skin/${encodeURIComponent(user)}/body`, size);
+export function bodyRenderUrl(user: string, params?: RenderParams): string {
+  return `${API_BASE}/mc/v1/skin/${encodeURIComponent(user)}/body${renderQuery(params)}`;
 }
 
-export function skin3dRenderUrl(user: string, area: SkinArea, size?: number): string {
-  return withSize(`${API_BASE}/mc/v1/skin/${encodeURIComponent(user)}/${area}/3d`, size);
+export function skin3dRenderUrl(user: string, area: SkinArea, params?: RenderParams): string {
+  return `${API_BASE}/mc/v1/skin/${encodeURIComponent(user)}/${area}/3d${renderQuery(params)}`;
 }
 
 export function capeUrl(type: CapeType, user: string): string {
@@ -38,22 +51,42 @@ export function capeUrl(type: CapeType, user: string): string {
 }
 
 export function capeRenderUrl(type: CapeType, user: string, size?: number): string {
-  return withSize(`${API_BASE}/mc/v1/capes/${type}/${encodeURIComponent(user)}/render`, size);
+  return `${API_BASE}/mc/v1/capes/${type}/${encodeURIComponent(user)}/render${renderQuery({ size })}`;
 }
 
-export function skinByUrlRenderUrl(area: SkinArea, skinTextureUrl: string, size?: number): string {
+export function skinByUrlRenderUrl(
+  area: SkinArea,
+  skinTextureUrl: string,
+  params?: RenderParams
+): string {
+  const extraQuery = renderQuery(params).replace(/^\?/, '');
   const url = `${API_BASE}/mc/v1/skin/x-url/${area}?url=${encodeURIComponent(skinTextureUrl)}`;
-  return size != null ? `${url}&size=${size}` : url;
+  return extraQuery === '' ? url : `${url}&${extraQuery}`;
 }
 
-export function serverPingUrl(host: string): string {
-  return `${API_BASE}/mc/v2/server/ping?host=${encodeURIComponent(host)}`;
+export function serverPingUrl(host: string, port?: number): string {
+  const url = `${API_BASE}/mc/v2/server/ping?host=${encodeURIComponent(host)}`;
+  return port != null ? `${url}&port=${port}` : url;
 }
 
 export function blocklistCheckUrl(host: string): string {
   return `${API_BASE}/mc/v2/server/blocklist/check?host=${encodeURIComponent(host)}`;
 }
 
-function withSize(url: string, size?: number): string {
-  return size != null ? `${url}?size=${size}` : url;
+function renderQuery(params: RenderParams = {}): string {
+  const query = new URLSearchParams();
+  if (params.size != null) {
+    query.set('size', String(params.size));
+  }
+  if (params.overlay === false) {
+    query.set('overlay', 'false');
+  }
+  if (params.slim != null) {
+    query.set('slim', String(params.slim));
+  }
+  if (params.download === true) {
+    query.set('download', 'true');
+  }
+  const encoded = query.toString();
+  return encoded === '' ? '' : `?${encoded}`;
 }

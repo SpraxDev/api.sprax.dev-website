@@ -1,11 +1,34 @@
 <script lang="ts">
-  import { bodyRenderUrl, headRenderUrl, skin3dRenderUrl, skinUrl } from '$lib/api';
+  import { bodyRenderUrl, headRenderUrl, skin3dRenderUrl, skinUrl, type RenderParams } from '$lib/api';
   import ShowcaseCard from '$lib/components/ShowcaseCard.svelte';
   import { username } from '$lib/state/username.svelte';
 
   type Variant = 'head' | 'body' | 'skin' | 'body3d' | 'head3d';
 
   let { variant, title }: { variant: Variant; title: string } = $props();
+
+  // Which query parameters each endpoint accepts (the raw skin file only
+  // takes `download`; `slim` is rejected for head renders).
+  const EXPOSED: Record<Variant, { size: boolean; overlay: boolean; slim: boolean; download: boolean }> = {
+    skin: { size: false, overlay: false, slim: false, download: true },
+    head: { size: true, overlay: true, slim: false, download: false },
+    body: { size: true, overlay: true, slim: true, download: false },
+    head3d: { size: true, overlay: true, slim: false, download: false },
+    body3d: { size: true, overlay: true, slim: true, download: false }
+  };
+  const exposed = $derived(EXPOSED[variant]);
+
+  let size = $state(128);
+  let overlay = $state(true);
+  let model = $state<'auto' | 'classic' | 'slim'>('auto');
+  let download = $state(false);
+
+  const renderParams: RenderParams = $derived({
+    size: exposed.size ? clampSize(size) : undefined,
+    overlay: exposed.overlay ? overlay : undefined,
+    slim: exposed.slim && model !== 'auto' ? model === 'slim' : undefined,
+    download: exposed.download ? download : undefined
+  });
 
   interface VariantConfig {
     url: string;
@@ -21,7 +44,7 @@
     switch (variant) {
       case 'head':
         return {
-          url: headRenderUrl(user, 128),
+          url: headRenderUrl(user, renderParams),
           width: 128,
           height: 128,
           pixelated: true,
@@ -29,7 +52,7 @@
         };
       case 'body':
         return {
-          url: bodyRenderUrl(user, 128),
+          url: bodyRenderUrl(user, renderParams),
           width: 128,
           height: 256,
           pixelated: true,
@@ -37,7 +60,7 @@
         };
       case 'skin':
         return {
-          url: skinUrl(user),
+          url: skinUrl(user, renderParams),
           width: 128,
           height: 128,
           pixelated: true,
@@ -45,7 +68,7 @@
         };
       case 'body3d':
         return {
-          url: skin3dRenderUrl(user, 'body', 128),
+          url: skin3dRenderUrl(user, 'body', renderParams),
           width: 128,
           height: 234,
           pixelated: false,
@@ -53,7 +76,7 @@
         };
       case 'head3d':
         return {
-          url: skin3dRenderUrl(user, 'head', 128),
+          url: skin3dRenderUrl(user, 'head', renderParams),
           width: 138,
           height: 128,
           pixelated: false,
@@ -61,6 +84,10 @@
         };
     }
   });
+
+  function clampSize(value: number): number {
+    return Number.isFinite(value) ? Math.min(1024, Math.max(8, Math.round(value))) : 128;
+  }
 
   // No effects needed: an image is "loading" until its URL matches the last
   // load/error event we saw.
@@ -90,6 +117,37 @@
       <p class="error">No skin found for this name</p>
     {/if}
   </div>
+
+  {#snippet params()}
+    {#if exposed.size}
+      <label>
+        size
+        <input
+          type="number"
+          min="8"
+          max="1024"
+          value={size}
+          onchange={(event) => (size = clampSize(event.currentTarget.valueAsNumber))}
+        />
+      </label>
+    {/if}
+    {#if exposed.overlay}
+      <label><input type="checkbox" bind:checked={overlay} /> overlay</label>
+    {/if}
+    {#if exposed.slim}
+      <label>
+        model
+        <select bind:value={model}>
+          <option value="auto">auto</option>
+          <option value="classic">classic</option>
+          <option value="slim">slim</option>
+        </select>
+      </label>
+    {/if}
+    {#if exposed.download}
+      <label><input type="checkbox" bind:checked={download} /> download</label>
+    {/if}
+  {/snippet}
 </ShowcaseCard>
 
 <style>
