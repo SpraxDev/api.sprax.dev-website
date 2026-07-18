@@ -196,6 +196,8 @@
     line-height: 1.9;
     white-space: pre;
     overflow-x: auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-border-strong) transparent;
   }
 
   .underlined {

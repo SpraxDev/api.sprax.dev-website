@@ -79,15 +79,15 @@
       <CapesCard />
     </section>
 
-    <h2 class="section-label"><span class="square" aria-hidden="true"></span>Skin by URL</h2>
-    <section class="showcase xurl" aria-label="Skin-by-URL preview">
-      <SkinByUrlCard />
-    </section>
-
     <h2 class="section-label"><span class="square" aria-hidden="true"></span>Server data</h2>
     <section class="showcase servers" aria-label="Server endpoint previews">
       <ServerPingCard />
       <BlocklistCheckCard />
+    </section>
+
+    <h2 class="section-label"><span class="square" aria-hidden="true"></span>Skin by URL</h2>
+    <section class="showcase xurl" aria-label="Skin-by-URL preview">
+      <SkinByUrlCard />
     </section>
   </main>
 </div>

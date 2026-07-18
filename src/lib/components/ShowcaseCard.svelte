@@ -21,6 +21,8 @@
   .card {
     display: flex;
     flex-direction: column;
+    /* Never let wide content (MOTDs, URLs) force the card past its grid track */
+    min-width: 0;
     background: var(--color-surface);
     border: 1px solid var(--color-border);
     border-radius: var(--radius);
@@ -42,7 +44,11 @@
   .preview {
     flex: 1;
     display: grid;
-    place-items: center;
+    /* minmax(0, 1fr) caps the track at the card width so overflowing
+       content scrolls inside its own box instead of widening the card */
+    grid-template-columns: minmax(0, 1fr);
+    justify-items: center;
+    align-items: center;
     padding: var(--space-4) var(--space-3);
   }
 </style>

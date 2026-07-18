@@ -181,5 +181,24 @@ function splitIntoLines(spans: MotdSpan[]): MotdSpan[][] {
       }
     }
   }
+  for (const line of lines) {
+    trimLineEnd(line);
+  }
   return lines;
+}
+
+/**
+ * Drops trailing whitespace from a line (some MOTDs pad lines with dozens of
+ * spaces, which would needlessly widen the rendered box). Leading whitespace
+ * is kept — servers use it for centering.
+ */
+function trimLineEnd(line: MotdSpan[]): void {
+  while (line.length > 0) {
+    const last = line[line.length - 1];
+    last.text = last.text.replace(/\s+$/, '');
+    if (last.text !== '') {
+      return;
+    }
+    line.pop();
+  }
 }

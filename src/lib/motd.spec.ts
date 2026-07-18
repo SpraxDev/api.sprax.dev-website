@@ -64,6 +64,14 @@ describe('parseMotd', () => {
     expect(parseMotd('')).toEqual([[]]);
     expect(parseMotd(undefined)).toEqual([[]]);
   });
+
+  it('trims trailing whitespace per line but keeps leading whitespace (Wynncraft-style padding)', () => {
+    const lines = parseMotd('  §acentered   \n§btext §7   ');
+    expect(lines).toEqual([
+      [{ text: '  ' }, { text: 'centered', color: '#55ff55' }],
+      [{ text: 'text', color: '#55ffff' }]
+    ]);
+  });
 });
 
 describe('stripLegacyCodes', () => {

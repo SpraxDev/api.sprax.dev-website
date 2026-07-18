@@ -38,12 +38,15 @@
     flex-shrink: 0;
   }
 
+  /* The full URL stays in the DOM — selectable, and scrollable to its end */
   code {
     color: var(--color-text-muted);
-    overflow: hidden;
-    text-overflow: ellipsis;
+    overflow-x: auto;
     white-space: nowrap;
     flex: 1;
+    min-width: 0;
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-border-strong) transparent;
   }
 
   button {
