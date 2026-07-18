@@ -80,14 +80,14 @@
     </section>
 
     <h2 class="section-label"><span class="square" aria-hidden="true"></span>Server data</h2>
-    <section class="showcase servers" aria-label="Server endpoint previews">
-      <ServerPingCard />
-      <BlocklistCheckCard />
+    <section class="showcase thirds" aria-label="Server endpoint previews">
+      <div class="span-2"><ServerPingCard /></div>
+      <div><BlocklistCheckCard /></div>
     </section>
 
     <h2 class="section-label"><span class="square" aria-hidden="true"></span>Skin by URL</h2>
-    <section class="showcase xurl" aria-label="Skin-by-URL preview">
-      <SkinByUrlCard />
+    <section class="showcase thirds" aria-label="Skin-by-URL preview">
+      <div class="span-2"><SkinByUrlCard /></div>
     </section>
   </main>
 
@@ -223,13 +223,32 @@
     grid-template-columns: repeat(auto-fit, minmax(min(18rem, 100%), 1fr));
   }
 
-  .showcase.data,
-  .showcase.servers {
+  .showcase.data {
     grid-template-columns: repeat(auto-fit, minmax(min(22rem, 100%), 1fr));
   }
 
-  .showcase.xurl {
-    grid-template-columns: minmax(min(22rem, 100%), 36rem);
+  /* Server data + skin-by-URL share one 3-column rhythm: wide card spans 2 */
+  .showcase.thirds {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .showcase.thirds > div {
+    display: grid;
+    min-width: 0;
+  }
+
+  .span-2 {
+    grid-column: span 2;
+  }
+
+  @media (max-width: 56rem) {
+    .showcase.thirds {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .span-2 {
+      grid-column: auto;
+    }
   }
 
   footer {
