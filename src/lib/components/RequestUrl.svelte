@@ -25,7 +25,9 @@
 <style>
   .request {
     display: flex;
-    align-items: center;
+    /* Baseline, not center: the URL's box grows when it gets a horizontal
+       scrollbar, which would push its text out of line with the GET label */
+    align-items: baseline;
     gap: var(--space-2);
     border-top: 1px solid var(--color-border);
     padding: var(--space-2) var(--space-3);
