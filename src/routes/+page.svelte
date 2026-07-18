@@ -70,8 +70,8 @@
 
     <h2 class="section-label"><span class="square" aria-hidden="true"></span>Player data</h2>
     <section class="showcase data" aria-label="Player data previews">
-      <UuidCard />
       <ProfileCard />
+      <UuidCard />
     </section>
 
     <h2 class="section-label"><span class="square" aria-hidden="true"></span>Capes</h2>
@@ -90,6 +90,23 @@
       <SkinByUrlCard />
     </section>
   </main>
+
+  <footer>
+    <div class="footer-inner">
+      <p>
+        <span class="license" title="The API and this website are free software">GPL-3.0-or-later</span>
+        ·
+        <a href="https://github.com/SpraxDev/api.sprax.dev" target="_blank" rel="noopener noreferrer">Source on GitHub</a>
+        ·
+        <a href="https://sprax.me/discord" target="_blank" rel="noopener noreferrer">Support on Discord</a>
+      </p>
+      <p>
+        <a href="https://sprax2013.de/#impressum" target="_blank" rel="noopener noreferrer">Legal notice</a>
+        ·
+        <a href="https://sprax2013.de/#privacy" target="_blank" rel="noopener noreferrer">Privacy policy</a>
+      </p>
+    </div>
+  </footer>
 </div>
 
 <style>
@@ -121,7 +138,8 @@
   }
 
   .topbar,
-  main {
+  main,
+  footer {
     position: relative;
   }
 
@@ -212,5 +230,41 @@
 
   .showcase.xurl {
     grid-template-columns: minmax(min(22rem, 100%), 36rem);
+  }
+
+  footer {
+    border-top: 1px solid var(--color-border);
+  }
+
+  .footer-inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-2) var(--space-4);
+    max-width: var(--page-max-width);
+    margin: 0 auto;
+    padding: var(--space-4);
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--color-text-faint);
+  }
+
+  .footer-inner p {
+    margin: 0;
+  }
+
+  .footer-inner a {
+    color: var(--color-text-muted);
+    text-decoration: none;
+  }
+
+  .footer-inner a:hover {
+    color: var(--color-accent);
+    text-decoration: underline;
+  }
+
+  .license {
+    color: var(--color-text-muted);
   }
 </style>
