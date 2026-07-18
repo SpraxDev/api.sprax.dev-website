@@ -2,7 +2,9 @@
   import { resolve } from '$app/paths';
   import { skinUrl } from '$lib/api';
   import Hero from '$lib/components/Hero.svelte';
+  import BlocklistCheckCard from '$lib/components/cards/BlocklistCheckCard.svelte';
   import RenderCard from '$lib/components/cards/RenderCard.svelte';
+  import ServerPingCard from '$lib/components/cards/ServerPingCard.svelte';
   import UuidCard from '$lib/components/cards/UuidCard.svelte';
   import { extractImagePalette } from '$lib/skin-colors';
   import { username } from '$lib/state/username.svelte';
@@ -54,10 +56,17 @@
   <main>
     <Hero />
 
-    <section class="showcase" aria-label="Live endpoint previews">
+    <h2 class="section-label"><span class="square" aria-hidden="true"></span>Player data</h2>
+    <section class="showcase players" aria-label="Player endpoint previews">
       <UuidCard />
       <RenderCard variant="head" title="Head render" />
       <RenderCard variant="body" title="Body render" />
+    </section>
+
+    <h2 class="section-label"><span class="square" aria-hidden="true"></span>Server data</h2>
+    <section class="showcase servers" aria-label="Server endpoint previews">
+      <ServerPingCard />
+      <BlocklistCheckCard />
     </section>
   </main>
 </div>
@@ -146,10 +155,34 @@
     padding: 0 var(--space-4) var(--space-16);
   }
 
+  .section-label {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-size: var(--text-sm);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-text-muted);
+    margin: var(--space-8) 0 var(--space-3);
+  }
+
+  .square {
+    width: 8px;
+    height: 8px;
+    background: var(--color-gold);
+  }
+
   .showcase {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
     gap: var(--space-4);
     align-items: stretch;
+  }
+
+  .showcase.players {
+    grid-template-columns: repeat(auto-fit, minmax(min(16rem, 100%), 1fr));
+  }
+
+  .showcase.servers {
+    grid-template-columns: repeat(auto-fit, minmax(min(22rem, 100%), 1fr));
   }
 </style>
