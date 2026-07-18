@@ -2,7 +2,7 @@
   import type { Snippet } from 'svelte';
   import RequestUrl from './RequestUrl.svelte';
 
-  let { title, url, children }: { title: string; url: string; children: Snippet } = $props();
+  let { title, url, children }: { title: string; url?: string; children: Snippet } = $props();
 </script>
 
 <article class="card">
@@ -10,7 +10,9 @@
   <div class="preview">
     {@render children()}
   </div>
-  <RequestUrl {url} />
+  {#if url != null}
+    <RequestUrl {url} />
+  {/if}
 </article>
 
 <style>

@@ -1,20 +1,21 @@
 <script lang="ts">
   let {
-    host = $bindable(),
+    value = $bindable(),
     label,
-    id
-  }: { host: string; label: string; id: string } = $props();
+    id,
+    placeholder
+  }: { value: string; label: string; id: string; placeholder: string } = $props();
 
-  // Writable derived: typing edits the draft locally; sample-server chips
-  // (which write `host` directly) re-derive it.
-  let draft = $derived(host);
+  // Writable derived: typing edits the draft locally; external writes to
+  // `value` (e.g. sample chips) re-derive it.
+  let draft = $derived(value);
   let commitTimeout: ReturnType<typeof setTimeout> | undefined;
 
   function commit(): void {
     clearTimeout(commitTimeout);
-    const value = draft.trim();
-    if (value !== '') {
-      host = value;
+    const committed = draft.trim();
+    if (committed !== '') {
+      value = committed;
     }
   }
 
@@ -31,7 +32,7 @@
   autocomplete="off"
   autocapitalize="off"
   spellcheck="false"
-  placeholder="mc.example.org"
+  {placeholder}
   bind:value={draft}
   oninput={scheduleCommit}
   onchange={commit}

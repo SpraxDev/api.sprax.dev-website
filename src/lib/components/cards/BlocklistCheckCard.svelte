@@ -1,7 +1,7 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import { blocklistCheckUrl } from '$lib/api';
-  import HostInput from '$lib/components/HostInput.svelte';
+  import DebouncedTextInput from '$lib/components/DebouncedTextInput.svelte';
   import ShowcaseCard from '$lib/components/ShowcaseCard.svelte';
   import { pickRandomSampleServer } from '$lib/data/sample-servers';
 
@@ -33,7 +33,12 @@
 
 <ShowcaseCard title="Blocklist check" url={blocklistCheckUrl(host)}>
   <div class="body">
-    <HostInput bind:host label="Server address to check against Mojang's blocklist" id="blocklist-host" />
+    <DebouncedTextInput
+      bind:value={host}
+      label="Server address to check against Mojang's blocklist"
+      id="blocklist-host"
+      placeholder="mc.example.org"
+    />
 
     {#if request === null}
       {@render skeleton()}

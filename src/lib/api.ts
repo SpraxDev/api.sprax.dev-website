@@ -2,8 +2,17 @@
 
 export const API_BASE = 'https://api.sprax.dev';
 
+export type SkinArea = 'head' | 'body';
+export type CapeType = 'mojang' | 'optifine' | 'labymod';
+
+export const CAPE_TYPES: readonly CapeType[] = ['mojang', 'optifine', 'labymod'];
+
 export function uuidUrl(username: string): string {
   return `${API_BASE}/mc/v2/uuid/${encodeURIComponent(username)}`;
+}
+
+export function profileUrl(user: string): string {
+  return `${API_BASE}/mc/v2/profile/${encodeURIComponent(user)}`;
 }
 
 // Skin endpoints use v1 — v2 does not officially exist for skins yet.
@@ -18,6 +27,23 @@ export function headRenderUrl(user: string, size?: number): string {
 
 export function bodyRenderUrl(user: string, size?: number): string {
   return withSize(`${API_BASE}/mc/v1/skin/${encodeURIComponent(user)}/body`, size);
+}
+
+export function skin3dRenderUrl(user: string, area: SkinArea, size?: number): string {
+  return withSize(`${API_BASE}/mc/v1/skin/${encodeURIComponent(user)}/${area}/3d`, size);
+}
+
+export function capeUrl(type: CapeType, user: string): string {
+  return `${API_BASE}/mc/v1/capes/${type}/${encodeURIComponent(user)}`;
+}
+
+export function capeRenderUrl(type: CapeType, user: string, size?: number): string {
+  return withSize(`${API_BASE}/mc/v1/capes/${type}/${encodeURIComponent(user)}/render`, size);
+}
+
+export function skinByUrlRenderUrl(area: SkinArea, skinTextureUrl: string, size?: number): string {
+  const url = `${API_BASE}/mc/v1/skin/x-url/${area}?url=${encodeURIComponent(skinTextureUrl)}`;
+  return size != null ? `${url}&size=${size}` : url;
 }
 
 export function serverPingUrl(host: string): string {

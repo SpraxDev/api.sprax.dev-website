@@ -3,8 +3,11 @@
   import { skinUrl } from '$lib/api';
   import Hero from '$lib/components/Hero.svelte';
   import BlocklistCheckCard from '$lib/components/cards/BlocklistCheckCard.svelte';
+  import CapesCard from '$lib/components/cards/CapesCard.svelte';
+  import ProfileCard from '$lib/components/cards/ProfileCard.svelte';
   import RenderCard from '$lib/components/cards/RenderCard.svelte';
   import ServerPingCard from '$lib/components/cards/ServerPingCard.svelte';
+  import SkinByUrlCard from '$lib/components/cards/SkinByUrlCard.svelte';
   import UuidCard from '$lib/components/cards/UuidCard.svelte';
   import { extractImagePalette } from '$lib/skin-colors';
   import { username } from '$lib/state/username.svelte';
@@ -59,8 +62,17 @@
     <h2 class="section-label"><span class="square" aria-hidden="true"></span>Player data</h2>
     <section class="showcase players" aria-label="Player endpoint previews">
       <UuidCard />
+      <ProfileCard />
       <RenderCard variant="head" title="Head render" />
       <RenderCard variant="body" title="Body render" />
+      <RenderCard variant="body3d" title="3D render" />
+      <RenderCard variant="skin" title="Raw skin" />
+      <div class="wide"><CapesCard /></div>
+    </section>
+
+    <h2 class="section-label"><span class="square" aria-hidden="true"></span>Skin by URL</h2>
+    <section class="showcase xurl" aria-label="Skin-by-URL preview">
+      <SkinByUrlCard />
     </section>
 
     <h2 class="section-label"><span class="square" aria-hidden="true"></span>Server data</h2>
@@ -184,5 +196,14 @@
 
   .showcase.servers {
     grid-template-columns: repeat(auto-fit, minmax(min(22rem, 100%), 1fr));
+  }
+
+  .showcase.xurl {
+    grid-template-columns: minmax(min(22rem, 100%), 36rem);
+  }
+
+  .wide {
+    grid-column: 1 / -1;
+    display: grid;
   }
 </style>

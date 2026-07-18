@@ -1,7 +1,7 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import { serverPingUrl } from '$lib/api';
-  import HostInput from '$lib/components/HostInput.svelte';
+  import DebouncedTextInput from '$lib/components/DebouncedTextInput.svelte';
   import ShowcaseCard from '$lib/components/ShowcaseCard.svelte';
   import { SAMPLE_SERVERS, pickRandomSampleServer } from '$lib/data/sample-servers';
   import { parseMotd, stripLegacyCodes } from '$lib/motd';
@@ -47,7 +47,12 @@
 
 <ShowcaseCard title="Server ping" url={serverPingUrl(host)}>
   <div class="body">
-    <HostInput bind:host label="Server address to ping" id="ping-host" />
+    <DebouncedTextInput
+      bind:value={host}
+      label="Server address to ping"
+      id="ping-host"
+      placeholder="mc.example.org"
+    />
 
     <div class="samples" role="group" aria-label="Sample servers">
       {#each SAMPLE_SERVERS as sample (sample)}
