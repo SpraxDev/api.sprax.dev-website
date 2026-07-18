@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest';
 import {
   bodyRenderUrl,
   serverPingUrl,
+  skinByUrl3dRenderUrl,
   skinByUrlRenderUrl,
   skinUrl
 } from './api';
@@ -29,6 +30,12 @@ describe('render URL builders', () => {
   it('appends render params after the x-url query', () => {
     expect(skinByUrlRenderUrl('head', 'https://example.org/skin.png', { size: 64 })).toBe(
       'https://api.sprax.dev/mc/v1/skin/x-url/head?url=https%3A%2F%2Fexample.org%2Fskin.png&size=64'
+    );
+  });
+
+  it('builds the 3d x-url path', () => {
+    expect(skinByUrl3dRenderUrl('body', 'https://example.org/skin.png', { size: 128 })).toBe(
+      'https://api.sprax.dev/mc/v1/skin/x-url/body/3d?url=https%3A%2F%2Fexample.org%2Fskin.png&size=128'
     );
   });
 

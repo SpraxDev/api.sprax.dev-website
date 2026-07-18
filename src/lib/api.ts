@@ -59,8 +59,20 @@ export function skinByUrlRenderUrl(
   skinTextureUrl: string,
   params?: RenderParams
 ): string {
+  return xUrlRenderUrl(area, skinTextureUrl, params);
+}
+
+export function skinByUrl3dRenderUrl(
+  area: SkinArea,
+  skinTextureUrl: string,
+  params?: RenderParams
+): string {
+  return xUrlRenderUrl(`${area}/3d`, skinTextureUrl, params);
+}
+
+function xUrlRenderUrl(path: string, skinTextureUrl: string, params?: RenderParams): string {
   const extraQuery = renderQuery(params).replace(/^\?/, '');
-  const url = `${API_BASE}/mc/v1/skin/x-url/${area}?url=${encodeURIComponent(skinTextureUrl)}`;
+  const url = `${API_BASE}/mc/v1/skin/x-url/${path}?url=${encodeURIComponent(skinTextureUrl)}`;
   return extraQuery === '' ? url : `${url}&${extraQuery}`;
 }
 

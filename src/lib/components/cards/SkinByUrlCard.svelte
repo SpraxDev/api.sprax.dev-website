@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { skinByUrlRenderUrl, type SkinArea } from '$lib/api';
+  import { skinByUrl3dRenderUrl, skinByUrlRenderUrl, type SkinArea } from '$lib/api';
   import DebouncedTextInput from '$lib/components/DebouncedTextInput.svelte';
   import ShowcaseCard from '$lib/components/ShowcaseCard.svelte';
 
@@ -9,6 +9,7 @@
     'https://textures.minecraft.net/texture/cc69184e66d39fc1f5ed11a5e19e250a0561c289bf8bdb69362b11bc7fc659c1';
 
   let textureUrl = $state(DEFAULT_TEXTURE_URL);
+  let style = $state<'3d' | 'flat'>('3d');
   let area = $state<SkinArea>('body');
   let size = $state(128);
   let overlay = $state(true);
@@ -19,15 +20,22 @@
   }
 
   const isHttps = $derived(textureUrl.startsWith('https://'));
-  const url = $derived(
-    skinByUrlRenderUrl(area, textureUrl, {
+  const url = $derived.by(() => {
+    const params = {
       size: clampSize(size),
       overlay,
       // The API rejects `slim` for head renders
       slim: area === 'body' && model !== 'auto' ? model === 'slim' : undefined
-    })
-  );
-  const height = $derived(area === 'body' ? 256 : 128);
+    };
+    return style === '3d'
+      ? skinByUrl3dRenderUrl(area, textureUrl, params)
+      : skinByUrlRenderUrl(area, textureUrl, params);
+  });
+  const width = $derived(style === '3d' && area === 'head' ? 138 : 128);
+  const height = $derived.by(() => {
+    if (area === 'head') return 128;
+    return style === '3d' ? 234 : 256;
+  });
 
   let loadedUrl = $state<string | null>(null);
   let failedUrl = $state<string | null>(null);
@@ -48,10 +56,10 @@
         <p class="error">The skin URL must start with https://</p>
       {:else}
         <img
-          class={['pixelated', { hidden: status !== 'loaded' }]}
+          class={[{ pixelated: style === 'flat', hidden: status !== 'loaded' }]}
           src={url}
           alt="Minecraft {area} render of the given skin texture"
-          width="128"
+          {width}
           {height}
           onload={() => (loadedUrl = url)}
           onerror={() => (failedUrl = url)}
@@ -68,6 +76,13 @@
   </div>
 
   {#snippet params()}
+    <label>
+      style
+      <select bind:value={style}>
+        <option value="3d">3D</option>
+        <option value="flat">flat</option>
+      </select>
+    </label>
     <label>
       area
       <select bind:value={area}>
