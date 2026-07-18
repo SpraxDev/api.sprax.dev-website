@@ -1,0 +1,55 @@
+/*
+ * Design tokens — "pixel-lit" direction.
+ * See docs/superpowers/specs/2026-07-18-visual-direction-hero-cards-design.md
+ *
+ * Dark is the default theme. A future light theme overrides the same custom
+ * properties under [data-theme='light'].
+ */
+
+:root {
+  /* Palette — deep blue-black "cave" with data supplying the color */
+  --color-bg: #0c1014;
+  --color-surface: #12171d;
+  --color-surface-raised: #1a2129;
+  --color-border: #242e39;
+  --color-border-strong: #33404e;
+  --color-text: #e6ebef;
+  --color-text-muted: #8b98a5;
+  --color-text-faint: #5d6a77;
+
+  /* Static accents: desaturated grass green + worn gold */
+  --color-accent: #7cb65b;
+  --color-accent-strong: #93cc72;
+  --color-gold: #cfa349;
+  --color-danger: #d4694f;
+
+  /* Skin-lit glow — overwritten from the current skin's dominant colors */
+  --glow-a: #7cb65b;
+  --glow-b: #cfa349;
+
+  /* Type */
+  --font-display: 'Departure Mono', ui-monospace, monospace;
+  --font-mono: var(--font-display);
+  --font-body: 'Atkinson Hyperlegible Next Variable', system-ui, sans-serif;
+
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.25rem;
+  --text-xl: 1.5rem;
+  --text-2xl: 2rem;
+  --text-3xl: 2.75rem;
+
+  /* Geometry — everything snaps to a 4px grid, corners stay sharp */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --radius: 2px;
+
+  --page-max-width: 68rem;
+}
