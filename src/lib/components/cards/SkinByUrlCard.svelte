@@ -1,9 +1,9 @@
 <script lang="ts">
-  import { profileUrl, skinByUrl3dRenderUrl, skinByUrlRenderUrl, type SkinArea } from '$lib/api';
+  import { skinByUrl3dRenderUrl, skinByUrlRenderUrl, type SkinArea } from '$lib/api';
   import DebouncedTextInput from '$lib/components/DebouncedTextInput.svelte';
   import ShowcaseCard from '$lib/components/ShowcaseCard.svelte';
   import { extractSkinTextureUrl } from '$lib/profile-textures';
-  import { username } from '$lib/state/username.svelte';
+  import { profile } from '$lib/state/profile.svelte';
 
   // A permanent textures.minecraft.net URL (SpraxDev's skin) so the card is
   // alive before anyone pastes their own.
@@ -14,18 +14,18 @@
   let style = $state<'3d' | 'flat'>('3d');
 
   // Follow the global username: adopt the skin URL from the player's profile
-  // so this card updates with the rest of the page. A profile without a skin
-  // (or a failed request) leaves the current URL untouched.
+  // (one shared request with the profile card) so this card updates with the
+  // rest of the page. A profile without a skin (or a failed request) leaves
+  // the current URL untouched.
   $effect(() => {
-    const name = username.value;
-    if (name === '') return;
+    const request = profile.request;
+    if (request == null) return;
 
-    const controller = new AbortController();
-    fetch(profileUrl(name), { signal: controller.signal })
-      .then((response) => (response.ok ? response.json() : null))
-      .then((profile) => {
-        if (controller.signal.aborted || profile == null) return;
-        const skinUrl = extractSkinTextureUrl(profile);
+    let cancelled = false;
+    request
+      .then((profileData) => {
+        if (cancelled) return;
+        const skinUrl = extractSkinTextureUrl(profileData);
         if (skinUrl != null) {
           textureUrl = skinUrl;
         }
@@ -33,7 +33,9 @@
       .catch(() => {
         // Decorative convenience only — keep the current URL on failure.
       });
-    return () => controller.abort();
+    return () => {
+      cancelled = true;
+    };
   });
   let area = $state<SkinArea>('body');
   let size = $state(128);

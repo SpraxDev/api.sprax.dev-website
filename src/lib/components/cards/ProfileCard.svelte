@@ -2,20 +2,12 @@
   import { abridgeStrings } from '$lib/abridge';
   import { profileUrl } from '$lib/api';
   import ShowcaseCard from '$lib/components/ShowcaseCard.svelte';
+  import { profile } from '$lib/state/profile.svelte';
   import { username } from '$lib/state/username.svelte';
 
   let expanded = $state(false);
 
-  async function fetchProfile(name: string): Promise<unknown> {
-    const response = await fetch(profileUrl(name));
-    const body = await response.json();
-    if (!response.ok) {
-      throw new Error(typeof body.error === 'string' ? body.error : `HTTP ${response.status}`);
-    }
-    return body;
-  }
-
-  const request = $derived(username.value === '' ? null : fetchProfile(username.value));
+  const request = $derived(profile.request);
 </script>
 
 {#snippet skeleton()}
