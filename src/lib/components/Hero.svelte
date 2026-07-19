@@ -37,10 +37,7 @@
 <section class="hero">
   <p class="eyebrow">api.sprax.dev</p>
   <h1>Minecraft profiles, skins &amp; blocklist data</h1>
-  <p class="tagline">
-    A free public REST API — no key, no signup. Type any username and every preview below runs
-    against the live API.
-  </p>
+  <p class="tagline">A free public REST API — type any username and try it live</p>
 
   <div class="input-row">
     <label class="visually-hidden" for="global-username">Minecraft username</label>
