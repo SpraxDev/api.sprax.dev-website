@@ -35,12 +35,12 @@
   {#each projects as project (project.name)}
     {@const logo = logoUrl(project.logo)}
     <article class="project">
-      <h4>
+      <h3>
         {#if logo != null}
-          <img class="logo" src={logo} alt="" width="24" height="24" />
+          <img class="logo" src={logo} alt="" width="24" height="24" loading="lazy" />
         {/if}
         {project.name}
-      </h4>
+      </h3>
       <p>{project.description}</p>
       {#if project.url != null || project.repo != null}
         <div class="links">
@@ -56,7 +56,7 @@
   {/each}
 
   <a class="project add" href={ADD_PROJECT_URL} target="_blank" rel="noopener noreferrer">
-    <h4>Add your project</h4>
+    <h3>Add your project</h3>
     <p>Using the API in your project? Open a pull request to get listed here.</p>
   </a>
 </div>
@@ -83,7 +83,7 @@
     border-color: color-mix(in srgb, var(--glow-a) 55%, var(--color-border));
   }
 
-  h4 {
+  h3 {
     display: flex;
     align-items: center;
     gap: var(--space-2);
@@ -128,7 +128,7 @@
     text-decoration: none;
   }
 
-  .add h4 {
+  .add h3 {
     color: var(--color-accent);
   }
 </style>
