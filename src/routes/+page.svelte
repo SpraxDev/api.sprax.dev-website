@@ -51,7 +51,9 @@
   <header class="topbar">
     <span class="wordmark"><span class="block" aria-hidden="true"></span>SPRAX API</span>
     <nav aria-label="Quick links">
-      <a href={resolve('/docs')}>Docs</a>
+      <!-- Full page load: Scalar rewrites history.state on /docs, which breaks
+           SvelteKit's client-side back/forward across the two pages -->
+      <a href={resolve('/docs')} data-sveltekit-reload>Docs</a>
       <a href="https://github.com/SpraxDev/api.sprax.dev" target="_blank" rel="noopener noreferrer">GitHub</a>
       <a href="https://status.sprax.dev/" target="_blank" rel="noopener noreferrer">Status</a>
       <a href="https://sprax.me/discord" target="_blank" rel="noopener noreferrer">Discord</a>
