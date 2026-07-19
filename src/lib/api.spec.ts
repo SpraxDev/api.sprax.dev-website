@@ -1,11 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import {
-  bodyRenderUrl,
-  serverPingUrl,
-  skinByUrl3dRenderUrl,
-  skinByUrlRenderUrl,
-  skinUrl
-} from './api';
+import { bodyRenderUrl, serverPingUrl, skinByUrl3dRenderUrl, skinByUrlRenderUrl, skinUrl } from './api';
 
 describe('render URL builders', () => {
   it('omits API defaults so URLs stay minimal', () => {

@@ -1,10 +1,10 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
   import { blocklistCheckUrl } from '$lib/api';
   import DebouncedTextInput from '$lib/components/DebouncedTextInput.svelte';
   import SampleServerChips from '$lib/components/SampleServerChips.svelte';
   import ShowcaseCard from '$lib/components/ShowcaseCard.svelte';
   import { initialSampleServer } from '$lib/data/sample-servers';
+  import { onMount } from 'svelte';
 
   let host = $state('');
 
