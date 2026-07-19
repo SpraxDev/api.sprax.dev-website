@@ -2,6 +2,7 @@
   import type { Attachment } from 'svelte/attachments';
   import { resolve } from '$app/paths';
   import { API_BASE } from '$lib/api';
+  import SocialMeta from '$lib/components/SocialMeta.svelte';
 
   let ready = $state(false);
 
@@ -52,13 +53,11 @@
   };
 </script>
 
-<svelte:head>
-  <title>API reference — Sprax API</title>
-  <meta
-    name="description"
-    content="Interactive API reference for api.sprax.dev — Minecraft profiles, skins, capes, server pings and blocklist data."
-  />
-</svelte:head>
+<SocialMeta
+  title="API reference — SpraxAPI"
+  description="Interactive API reference for api.sprax.dev — Minecraft profiles, skins, capes, server pings and blocklist data."
+  path="/docs"
+/>
 
 <header class="topbar">
   <a class="wordmark" href={resolve('/')}>
