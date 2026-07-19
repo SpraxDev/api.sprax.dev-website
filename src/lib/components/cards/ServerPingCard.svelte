@@ -57,7 +57,12 @@
   </div>
 {/snippet}
 
-<ShowcaseCard title="Server ping" {url}>
+<ShowcaseCard
+  title="Server ping"
+  badge="experimental"
+  badgeTitle="This endpoint is still in the works — expect bugs and unstable behavior"
+  {url}
+>
   <div class="body">
     <DebouncedTextInput
       bind:value={hostInput}
@@ -120,6 +125,11 @@
         <p class="offline">{error.message}</p>
       {/await}
     {/if}
+
+    <p class="hint">
+      This endpoint is experimental — known bugs may cause failed or wrong results for some
+      servers.
+    </p>
   </div>
 </ShowcaseCard>
 
@@ -202,6 +212,12 @@
     min-height: 64px;
     display: grid;
     align-items: center;
+  }
+
+  .hint {
+    margin: 0;
+    font-size: var(--text-xs);
+    color: var(--color-text-faint);
   }
 
   .skeleton {
