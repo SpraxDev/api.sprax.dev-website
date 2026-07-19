@@ -44,6 +44,11 @@ export default defineConfig({
   ],
   test: {
     expect: { requireAssertions: true },
+    coverage: {
+      // istanbul instead of v8 because the browser tests also run in Firefox (v8 is Chromium-only)
+      provider: 'istanbul',
+      include: ['src/**/*.{js,ts,svelte}'],
+    },
     projects: [
       {
         extends: './vite.config.ts',
