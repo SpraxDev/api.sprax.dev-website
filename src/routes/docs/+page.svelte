@@ -7,6 +7,7 @@
   import { theme, type Theme } from '$lib/state/theme.svelte';
 
   let ready = $state(false);
+  let headerHeight = $state(0);
 
   function scalarConfig(effectiveTheme: Theme) {
     return {
@@ -85,7 +86,7 @@
   path="/docs"
 />
 
-<header class="topbar">
+<header class="topbar" bind:clientHeight={headerHeight}>
   <a class="wordmark" href={resolve('/')}>
     <span class="block" aria-hidden="true"></span>SPRAX API
   </a>
@@ -100,16 +101,22 @@
 {#if !ready}
   <p class="loading">Loading API reference…</p>
 {/if}
-<div {@attach scalar}></div>
+<!-- The header height offsets Scalar's full-viewport layout so its sidebar
+     (incl. the "Powered by Scalar" footer) isn't clipped behind the topbar -->
+<div style:--scalar-custom-header-height="{headerHeight + 1}px" {@attach scalar}></div>
 
 <style>
   .topbar {
+    position: sticky;
+    top: 0;
+    z-index: 10;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
     gap: var(--space-2) var(--space-4);
     padding: var(--space-4);
+    background: var(--color-bg);
     border-bottom: 1px solid var(--color-border);
   }
 
