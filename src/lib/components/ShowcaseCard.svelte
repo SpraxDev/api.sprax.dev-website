@@ -4,15 +4,31 @@
 
   let {
     title,
+    badge,
+    badgeTitle,
     url,
     children,
     params
-  }: { title?: string; url?: string; children: Snippet; params?: Snippet } = $props();
+  }: {
+    title?: string;
+    /** Small label next to the title, e.g. 'experimental' */
+    badge?: string;
+    /** Tooltip explaining the badge */
+    badgeTitle?: string;
+    url?: string;
+    children: Snippet;
+    params?: Snippet;
+  } = $props();
 </script>
 
 <article class="card">
   {#if title != null}
-    <h3>{title}</h3>
+    <h3>
+      {title}
+      {#if badge != null}
+        <span class="badge" title={badgeTitle}>{badge}</span>
+      {/if}
+    </h3>
   {/if}
   <div class="preview">
     {@render children()}
@@ -47,11 +63,24 @@
   }
 
   h3 {
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-2);
     font-size: var(--text-sm);
     text-transform: uppercase;
     letter-spacing: 0.08em;
     color: var(--color-text-muted);
     padding: var(--space-3) var(--space-3) 0;
+  }
+
+  .badge {
+    font-size: var(--text-xs);
+    letter-spacing: 0.04em;
+    color: var(--color-gold);
+    border: 1px solid color-mix(in srgb, var(--color-gold) 50%, transparent);
+    border-radius: var(--radius);
+    padding: 0 var(--space-1);
+    cursor: help;
   }
 
   .preview {
