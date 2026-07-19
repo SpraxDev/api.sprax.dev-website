@@ -27,8 +27,17 @@
   box-sizing: border-box;
 }
 
+/* Follow the system theme unless the user picked one (set pre-paint in app.html) */
 html {
+  color-scheme: light dark;
+}
+
+:root[data-theme='dark'] {
   color-scheme: dark;
+}
+
+:root[data-theme='light'] {
+  color-scheme: light;
 }
 
 body {

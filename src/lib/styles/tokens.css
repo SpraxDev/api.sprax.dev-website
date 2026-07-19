@@ -2,26 +2,28 @@
  * Design tokens — "pixel-lit" direction.
  * See docs/superpowers/specs/2026-07-18-visual-direction-hero-cards-design.md
  *
- * Dark is the default theme. A future light theme overrides the same custom
- * properties under [data-theme='light'].
+ * Every color is defined once via light-dark(). The effective theme follows
+ * the system preference until the user picks one explicitly (data-theme
+ * attribute set pre-paint from localStorage, toggled in the topbar).
  */
 
 :root {
-  /* Palette — deep blue-black "cave" with data supplying the color */
-  --color-bg: #0c1014;
-  --color-surface: #12171d;
-  --color-surface-raised: #1a2129;
-  --color-border: #242e39;
-  --color-border-strong: #33404e;
-  --color-text: #e6ebef;
-  --color-text-muted: #8b98a5;
-  --color-text-faint: #5d6a77;
+  /* Palette — deep blue-black "cave" (dark) / cool paper (light) */
+  --color-bg: light-dark(#eef1f4, #0c1014);
+  --color-surface: light-dark(#f7f9fa, #12171d);
+  --color-surface-raised: light-dark(#e2e8ed, #1a2129);
+  --color-border: light-dark(#d3dae1, #242e39);
+  --color-border-strong: light-dark(#aebac5, #33404e);
+  --color-text: light-dark(#171f27, #e6ebef);
+  --color-text-muted: light-dark(#4d5a66, #8b98a5);
+  /* Faint still needs >= 4.5:1 on surfaces — it's used for small text */
+  --color-text-faint: light-dark(#5f6c78, #7a8794);
 
   /* Static accents: desaturated grass green + worn gold */
-  --color-accent: #7cb65b;
-  --color-accent-strong: #93cc72;
-  --color-gold: #cfa349;
-  --color-danger: #d4694f;
+  --color-accent: light-dark(#417c28, #7cb65b);
+  --color-accent-strong: light-dark(#2f6318, #93cc72);
+  --color-gold: light-dark(#8a6d1f, #cfa349);
+  --color-danger: light-dark(#a53c22, #d4694f);
 
   /* Skin-lit glow — overwritten from the current skin's dominant colors */
   --glow-a: #7cb65b;
