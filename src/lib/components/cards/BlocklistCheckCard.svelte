@@ -22,14 +22,32 @@
   }
 
   const request = $derived(host === '' ? null : checkBlocklist(host));
+
+  // The checked wildcard variants are deterministic, so the skeleton can
+  // mirror the exact row count and text widths before the response arrives.
+  function expectedVariants(hostname: string): string[] {
+    const labels = (hostname === '' ? 'mc.example.org' : hostname).split('.');
+    const variants: string[] = [];
+    for (let i = 0; i < labels.length; ++i) {
+      const rest = labels.slice(i).join('.');
+      if (i === 0 || i < labels.length - 1) {
+        variants.push(rest);
+      }
+      variants.push(`*.${rest}`);
+    }
+    return variants;
+  }
 </script>
 
 {#snippet skeleton()}
-  <div class="variants" aria-hidden="true">
-    <span class="skeleton" style:width="70%"></span>
-    <span class="skeleton" style:width="80%"></span>
-    <span class="skeleton" style:width="60%"></span>
-  </div>
+  <ul class="variants" aria-hidden="true">
+    {#each expectedVariants(host) as variant (variant)}
+      <li>
+        <code><span class="bar" style:width="{variant.length}ch"></span></code>
+        <span class="verdict"><span class="bar" style:width="5ch"></span></span>
+      </li>
+    {/each}
+  </ul>
 {/snippet}
 
 <ShowcaseCard title="Blocklist check" url={blocklistCheckUrl(host)}>
@@ -125,9 +143,11 @@
     color: var(--color-text-faint);
   }
 
-  span.skeleton {
-    display: block;
-    height: var(--space-3);
+  .bar {
+    display: inline-block;
+    max-width: 100%;
+    height: 0.9em;
+    vertical-align: middle;
     background: var(--color-surface-raised);
     animation: pulse 1.2s ease-in-out infinite alternate;
   }
