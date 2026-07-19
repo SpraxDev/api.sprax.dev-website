@@ -43,11 +43,16 @@
 </script>
 
 {#snippet skeleton()}
-  <div class="result skeleton-row" aria-hidden="true">
+  <!-- Mirrors the loaded layout: favicon, a two-line MOTD box (the in-game
+       server list allows two lines), and the players/version meta line -->
+  <div class="result" aria-hidden="true">
     <div class="favicon skeleton"></div>
     <div class="lines">
-      <span class="skeleton" style:width="80%"></span>
-      <span class="skeleton" style:width="55%"></span>
+      <p class="motd"><span class="bar" style:width="28ch"></span>{'\n'}<span
+          class="bar"
+          style:width="34ch"
+        ></span></p>
+      <p class="meta"><span class="bar" style:width="36ch"></span></p>
     </div>
   </div>
 {/snippet}
@@ -199,16 +204,16 @@
     align-items: center;
   }
 
-  .skeleton-row .lines {
-    justify-content: center;
-  }
-
-  span.skeleton {
-    display: block;
-    height: var(--space-3);
-  }
-
   .skeleton {
+    background: var(--color-surface-raised);
+    animation: pulse 1.2s ease-in-out infinite alternate;
+  }
+
+  .bar {
+    display: inline-block;
+    max-width: 100%;
+    height: 0.9em;
+    vertical-align: middle;
     background: var(--color-surface-raised);
     animation: pulse 1.2s ease-in-out infinite alternate;
   }
