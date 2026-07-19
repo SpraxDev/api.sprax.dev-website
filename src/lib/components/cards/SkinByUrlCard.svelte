@@ -88,6 +88,7 @@
           alt="Minecraft {area} render of the given skin texture"
           {width}
           {height}
+          loading="lazy"
           onload={() => (loadedUrl = url)}
           onerror={() => (failedUrl = url)}
         />

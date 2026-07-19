@@ -23,13 +23,16 @@
 </script>
 
 <div class="provider">
-  <h4>{LABELS[type]}</h4>
+  <h3>{LABELS[type]}</h3>
   <div class="frame">
     {#if username.value !== ''}
       <img
         class={{ hidden: status !== 'loaded' }}
         src={url}
         alt="{LABELS[type]} cape of {username.value}"
+        width={type === 'labymod' ? 352 : size}
+        height={type === 'labymod' ? 272 : size * 1.6}
+        loading="lazy"
         onload={() => (loadedUrl = url)}
         onerror={() => (failedUrl = url)}
       />
@@ -50,7 +53,7 @@
     min-width: 0;
   }
 
-  h4 {
+  h3 {
     font-size: var(--text-xs);
     text-transform: uppercase;
     letter-spacing: 0.08em;
@@ -69,6 +72,8 @@
 
   img {
     grid-area: 1 / 1;
+    width: auto;
+    height: auto;
     max-height: 160px;
     max-width: 100%;
   }
