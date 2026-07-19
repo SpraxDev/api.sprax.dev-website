@@ -87,7 +87,9 @@
 />
 
 <header class="topbar" bind:clientHeight={headerHeight}>
-  <a class="wordmark" href={resolve('/')}>
+  <!-- Full page load: Scalar rewrites history.state, which breaks SvelteKit's
+       client-side back/forward across the two pages -->
+  <a class="wordmark" href={resolve('/')} data-sveltekit-reload>
     <span class="block" aria-hidden="true"></span>SPRAX API
   </a>
   <nav aria-label="Quick links">
