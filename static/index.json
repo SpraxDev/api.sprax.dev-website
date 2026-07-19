@@ -1,0 +1,13 @@
+{
+  "name": "SpraxAPI",
+  "message": "Free public Minecraft API — profiles, UUIDs, skin renders, capes, server pings and Mojang blocklist tracking. You are seeing this pointer document because your client did not ask for HTML; browsers get the website.",
+  "links": {
+    "openapi": "https://api.sprax.dev/openapi.json",
+    "docs": "https://api.sprax.dev/docs",
+    "api-catalog": "https://api.sprax.dev/.well-known/api-catalog",
+    "llms-txt": "https://api.sprax.dev/llms.txt",
+    "status": "https://api.sprax.dev/status",
+    "github": "https://github.com/SpraxDev/api.sprax.dev",
+    "website": "https://api.sprax.dev/"
+  }
+}
