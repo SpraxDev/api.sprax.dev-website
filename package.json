@@ -2,17 +2,25 @@
   "name": "sprax-api-website",
   "version": "0.0.1-SNAPSHOT",
   "private": true,
-  "description": "Showcase website for api.sprax.dev – interactive endpoint previews, statistics and developer docs",
+  "description": "Showcase website for api.sprax.dev – Interactive endpoint previews, statistics and developer docs",
+  "homepage": "https://api.sprax.dev/",
   "license": "GPL-3.0-or-later",
   "keywords": [
-    "minecraft",
-    "rest-api"
+    "rest-api",
+    "minecraft"
   ],
   "author": {
     "name": "Christian Koop",
     "url": "https://github.com/SpraxDev"
   },
   "contributors": [],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SpraxDev/api.sprax.dev-website.git"
+  },
+  "bugs": {
+    "url": "https://github.com/SpraxDev/api.sprax.dev-website/issues"
+  },
   "type": "module",
   "scripts": {
     "prepare": "svelte-kit sync || echo ''",
