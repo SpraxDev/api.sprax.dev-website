@@ -3,6 +3,7 @@
   import { skinUrl } from '$lib/api';
   import DeveloperSection from '$lib/components/DeveloperSection.svelte';
   import Hero from '$lib/components/Hero.svelte';
+  import SocialMeta from '$lib/components/SocialMeta.svelte';
   import ProjectsSection from '$lib/components/ProjectsSection.svelte';
   import BlocklistCheckCard from '$lib/components/cards/BlocklistCheckCard.svelte';
   import CapesCard from '$lib/components/cards/CapesCard.svelte';
@@ -37,13 +38,11 @@
   });
 </script>
 
-<svelte:head>
-  <title>Sprax API — Minecraft profiles, skins &amp; blocklist data</title>
-  <meta
-    name="description"
-    content="Free public Minecraft REST API: profiles, UUIDs, skin renders, capes, server pings and Mojang blocklist tracking. No API key required."
-  />
-</svelte:head>
+<SocialMeta
+  title="SpraxAPI — Minecraft profiles, skins & blocklist data"
+  description="Free public Minecraft REST API: profiles, UUIDs, skin renders, capes, server pings and Mojang blocklist tracking. No API key required."
+  path="/"
+/>
 
 <div class="page" style:--glow-a={glow[0]} style:--glow-b={glow[1]}>
   <div class="glow" aria-hidden="true"></div>
