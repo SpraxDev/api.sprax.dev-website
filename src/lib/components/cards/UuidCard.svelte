@@ -1,7 +1,16 @@
 <script lang="ts">
   import { uuidUrl } from '$lib/api';
+  import JsonSkeleton, { type SkeletonLine } from '$lib/components/JsonSkeleton.svelte';
   import ShowcaseCard from '$lib/components/ShowcaseCard.svelte';
   import { username } from '$lib/state/username.svelte';
+
+  // Mirrors the known response shape: { "id": "<32 hex>", "name": "..." }
+  const SKELETON_LINES: SkeletonLine[] = [
+    { indent: 0, width: 1 },
+    { indent: 2, width: 41 },
+    { indent: 2, width: 19 },
+    { indent: 0, width: 1 }
+  ];
 
   async function fetchUuid(name: string): Promise<{ id: string; name: string }> {
     const response = await fetch(uuidUrl(name));
@@ -16,11 +25,7 @@
 </script>
 
 {#snippet skeleton()}
-  <div class="skeleton" aria-hidden="true">
-    <span style:width="60%"></span>
-    <span style:width="90%"></span>
-    <span style:width="40%"></span>
-  </div>
+  <JsonSkeleton lines={SKELETON_LINES} />
 {/snippet}
 
 <ShowcaseCard title="UUID lookup" url={uuidUrl(username.value)}>
@@ -49,29 +54,10 @@
     overflow-wrap: anywhere;
   }
 
-  .skeleton {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-2);
-    width: 100%;
-  }
-
-  .skeleton span {
-    height: var(--space-3);
-    background: var(--color-surface-raised);
-    animation: pulse 1.2s ease-in-out infinite alternate;
-  }
-
   .error {
     font-family: var(--font-mono);
     font-size: var(--text-sm);
     color: var(--color-danger);
     margin: 0;
-  }
-
-  @keyframes pulse {
-    to {
-      opacity: 0.4;
-    }
   }
 </style>
