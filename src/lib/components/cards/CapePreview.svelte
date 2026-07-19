@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { capeRenderUrl, capeUrl, type CapeType } from '$lib/api';
+  import { capeRenderUrl, type CapeType, capeUrl } from '$lib/api';
   import RequestUrl from '$lib/components/RequestUrl.svelte';
   import { username } from '$lib/state/username.svelte';
 

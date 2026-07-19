@@ -1,12 +1,12 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
   import { serverPingUrl } from '$lib/api';
   import DebouncedTextInput from '$lib/components/DebouncedTextInput.svelte';
   import SampleServerChips from '$lib/components/SampleServerChips.svelte';
-  import { parseHostInput } from '$lib/host-input';
   import ShowcaseCard from '$lib/components/ShowcaseCard.svelte';
   import { initialSampleServer } from '$lib/data/sample-servers';
+  import { parseHostInput } from '$lib/host-input';
   import { parseMotd, stripLegacyCodes } from '$lib/motd';
+  import { onMount } from 'svelte';
 
   interface PingResult {
     online?: boolean;

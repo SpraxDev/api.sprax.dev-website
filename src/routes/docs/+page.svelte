@@ -1,10 +1,10 @@
 <script lang="ts">
-  import type { Attachment } from 'svelte/attachments';
   import { resolve } from '$app/paths';
   import { API_BASE } from '$lib/api';
   import SocialMeta from '$lib/components/SocialMeta.svelte';
   import ThemeToggle from '$lib/components/ThemeToggle.svelte';
   import { theme, type Theme } from '$lib/state/theme.svelte';
+  import type { Attachment } from 'svelte/attachments';
 
   let ready = $state(false);
   let headerHeight = $state(0);

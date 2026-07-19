@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
   import { username } from '$lib/state/username.svelte';
+  import { onMount } from 'svelte';
 
   // Writable derived: typing edits the draft locally, the dice button
   // (which writes username.value) re-derives it.

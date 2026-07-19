@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { skinByUrl3dRenderUrl, skinByUrlRenderUrl, type SkinArea } from '$lib/api';
+  import { type SkinArea, skinByUrl3dRenderUrl, skinByUrlRenderUrl } from '$lib/api';
   import DebouncedTextInput from '$lib/components/DebouncedTextInput.svelte';
   import ShowcaseCard from '$lib/components/ShowcaseCard.svelte';
   import { extractSkinTextureUrl } from '$lib/profile-textures';

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { bodyRenderUrl, headRenderUrl, skin3dRenderUrl, skinUrl, type RenderParams } from '$lib/api';
+  import { bodyRenderUrl, headRenderUrl, type RenderParams, skin3dRenderUrl, skinUrl } from '$lib/api';
   import ShowcaseCard from '$lib/components/ShowcaseCard.svelte';
   import { username } from '$lib/state/username.svelte';
 
