@@ -1,0 +1,16 @@
+{
+  "linkset": [
+    {
+      "anchor": "https://api.sprax.dev/",
+      "service-desc": [
+        { "href": "https://api.sprax.dev/openapi.json", "type": "application/json" },
+        { "href": "https://api.sprax.dev/openapi.yaml", "type": "application/yaml" }
+      ],
+      "service-doc": [{ "href": "https://api.sprax.dev/docs", "type": "text/html" }],
+      "status": [
+        { "href": "https://api.sprax.dev/status", "type": "application/json" },
+        { "href": "https://status.sprax.dev/", "type": "text/html" }
+      ]
+    }
+  ]
+}
