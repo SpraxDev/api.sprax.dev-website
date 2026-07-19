@@ -3,8 +3,48 @@
   import { resolve } from '$app/paths';
   import { API_BASE } from '$lib/api';
   import SocialMeta from '$lib/components/SocialMeta.svelte';
+  import ThemeToggle from '$lib/components/ThemeToggle.svelte';
+  import { theme, type Theme } from '$lib/state/theme.svelte';
 
   let ready = $state(false);
+
+  function scalarConfig(effectiveTheme: Theme) {
+    return {
+      url: `${API_BASE}/openapi.json`,
+      // Scalar's dark mode is driven by the site's theme toggle — one source
+      // of truth, so Scalar's own toggle stays hidden
+      forceDarkModeState: effectiveTheme,
+      hideDarkModeToggle: true,
+      // A plain reference: no MCP generator, no API-client button, and no
+      // developer toolbar / Ask-AI chrome (not even on localhost)
+      mcp: { disabled: true },
+      hideClientButton: true,
+      showDeveloperTools: 'never' as const,
+      // Not in the public config type (yet), but honored at runtime:
+      // kills the Ask-AI agent button, which otherwise shows on localhost
+      ...{ agent: { disabled: true } },
+      // Fonts are self-hosted by the site — don't fetch Scalar's CDN fonts
+      withDefaultFonts: false,
+      customCss: `
+        .scalar-app {
+          --scalar-font: 'Atkinson Hyperlegible Next Variable', system-ui, sans-serif;
+          --scalar-font-code: 'Departure Mono', ui-monospace, monospace;
+        }
+        .dark-mode {
+          --scalar-color-accent: #93cc72;
+          --scalar-background-1: #0c1014;
+          --scalar-background-2: #12171d;
+          --scalar-background-3: #1a2129;
+        }
+        .light-mode {
+          --scalar-color-accent: #417c28;
+          --scalar-background-1: #eef1f4;
+          --scalar-background-2: #f7f9fa;
+          --scalar-background-3: #e2e8ed;
+        }
+      `
+    };
+  }
 
   // Loaded lazily on the client only — the Scalar bundle is heavy and
   // must not run during prerendering.
@@ -17,32 +57,7 @@
       import('@scalar/api-reference/style.css')
     ]).then(([{ createApiReference }]) => {
       if (cancelled) return;
-      app = createApiReference(container, {
-        url: `${API_BASE}/openapi.json`,
-        darkMode: true,
-        // A plain reference: no MCP generator, no API-client button, and no
-        // developer toolbar / Ask-AI chrome (not even on localhost)
-        mcp: { disabled: true },
-        hideClientButton: true,
-        showDeveloperTools: 'never',
-        // Not in the public config type (yet), but honored at runtime:
-        // kills the Ask-AI agent button, which otherwise shows on localhost
-        ...{ agent: { disabled: true } },
-        // Fonts are self-hosted by the site — don't fetch Scalar's CDN fonts
-        withDefaultFonts: false,
-        customCss: `
-          .scalar-app {
-            --scalar-font: 'Atkinson Hyperlegible Next Variable', system-ui, sans-serif;
-            --scalar-font-code: 'Departure Mono', ui-monospace, monospace;
-          }
-          .dark-mode {
-            --scalar-color-accent: #93cc72;
-            --scalar-background-1: #0c1014;
-            --scalar-background-2: #12171d;
-            --scalar-background-3: #1a2129;
-          }
-        `
-      });
+      app = createApiReference(container, scalarConfig(theme.effective));
       ready = true;
     });
 
@@ -51,6 +66,17 @@
       app?.destroy?.();
     };
   };
+
+  // Keep Scalar in sync when the theme changes after initialization. Its
+  // forceDarkModeState is only read once at setup, but all of its styling
+  // keys off these two body classes — and with its own toggle hidden,
+  // nothing else touches them.
+  $effect(() => {
+    const effectiveTheme = theme.effective;
+    if (!ready) return;
+    document.body.classList.toggle('dark-mode', effectiveTheme === 'dark');
+    document.body.classList.toggle('light-mode', effectiveTheme === 'light');
+  });
 </script>
 
 <SocialMeta
@@ -67,6 +93,7 @@
     <a href="https://github.com/SpraxDev/api.sprax.dev" target="_blank" rel="noopener noreferrer">GitHub</a>
     <a href="https://status.sprax.dev/" target="_blank" rel="noopener noreferrer">Status</a>
     <a href="https://sprax.me/discord" target="_blank" rel="noopener noreferrer">Discord</a>
+    <ThemeToggle />
   </nav>
 </header>
 
@@ -111,6 +138,7 @@
   nav {
     display: flex;
     flex-wrap: wrap;
+    align-items: center;
     gap: var(--space-2) var(--space-4);
     font-family: var(--font-mono);
     font-size: var(--text-sm);

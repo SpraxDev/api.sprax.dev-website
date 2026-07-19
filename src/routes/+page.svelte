@@ -4,6 +4,7 @@
   import DeveloperSection from '$lib/components/DeveloperSection.svelte';
   import Hero from '$lib/components/Hero.svelte';
   import SocialMeta from '$lib/components/SocialMeta.svelte';
+  import ThemeToggle from '$lib/components/ThemeToggle.svelte';
   import ProjectsSection from '$lib/components/ProjectsSection.svelte';
   import BlocklistCheckCard from '$lib/components/cards/BlocklistCheckCard.svelte';
   import CapesCard from '$lib/components/cards/CapesCard.svelte';
@@ -54,6 +55,7 @@
       <a href="https://github.com/SpraxDev/api.sprax.dev" target="_blank" rel="noopener noreferrer">GitHub</a>
       <a href="https://status.sprax.dev/" target="_blank" rel="noopener noreferrer">Status</a>
       <a href="https://sprax.me/discord" target="_blank" rel="noopener noreferrer">Discord</a>
+      <ThemeToggle />
     </nav>
   </header>
 
@@ -184,6 +186,7 @@
   nav {
     display: flex;
     flex-wrap: wrap;
+    align-items: center;
     gap: var(--space-2) var(--space-4);
     font-family: var(--font-mono);
     font-size: var(--text-sm);
