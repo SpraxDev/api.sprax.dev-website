@@ -15,37 +15,40 @@
   "contributors": [],
   "type": "module",
   "scripts": {
-    "build": "vite build",
     "prepare": "svelte-kit sync || echo ''",
+
+    "build": "vite build",
+    "dev": "vite dev",
+    "preview": "vite preview",
 
     "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
     "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
 
     "test": "npm run test:unit -- --run",
     "test:coverage": "npm run test:unit -- --run --coverage",
-    "test:unit": "vitest",
-
-    "dev": "vite dev",
-    "preview": "vite preview"
+    "test:unit": "vitest"
   },
   "engines": {
     "node": ">=24.0.0",
     "npm": ">=11.0.0"
   },
   "devDependencies": {
-    "@fontsource-variable/atkinson-hyperlegible-next": "^5.2.6",
+    "@fontsource-variable/atkinson-hyperlegible-next": "^5.3.0",
     "@scalar/api-reference": "^1.62.9",
     "@sveltejs/adapter-static": "^3.0.10",
-    "@sveltejs/kit": "^2.63.0",
-    "@sveltejs/vite-plugin-svelte": "^7.1.2",
-    "@vitest/browser-playwright": "^4.1.8",
+    "@sveltejs/kit": "^2.70.1",
+    "@sveltejs/vite-plugin-svelte": "^7.2.0",
+    "@vitest/browser-playwright": "^4.1.10",
     "@vitest/coverage-istanbul": "^4.1.10",
-    "playwright": "^1.60.0",
-    "svelte": "^5.56.1",
-    "svelte-check": "^4.6.0",
+    "playwright": "^1.61.1",
+    "svelte": "^5.56.6",
+    "svelte-check": "^4.7.3",
     "typescript": "^6.0.3",
-    "vite": "^8.0.16",
-    "vitest": "^4.1.8",
-    "vitest-browser-svelte": "^2.1.1"
+    "vite": "^8.1.5",
+    "vitest": "^4.1.10",
+    "vitest-browser-svelte": "^3.0.0"
+  },
+  "allowScripts": {
+    "vue-demi": false
   }
 }
