@@ -1,7 +1,9 @@
 <script lang="ts">
   import { resolve } from '$app/paths';
   import { skinUrl } from '$lib/api';
+  import DeveloperSection from '$lib/components/DeveloperSection.svelte';
   import Hero from '$lib/components/Hero.svelte';
+  import ProjectsSection from '$lib/components/ProjectsSection.svelte';
   import BlocklistCheckCard from '$lib/components/cards/BlocklistCheckCard.svelte';
   import CapesCard from '$lib/components/cards/CapesCard.svelte';
   import ProfileCard from '$lib/components/cards/ProfileCard.svelte';
@@ -88,6 +90,16 @@
     <h2 class="section-label"><span class="square" aria-hidden="true"></span>Skin by URL</h2>
     <section class="showcase thirds" aria-label="Skin-by-URL preview">
       <div class="span-2"><SkinByUrlCard /></div>
+    </section>
+
+    <h2 class="section-label"><span class="square" aria-hidden="true"></span>For developers</h2>
+    <section aria-label="Developer information">
+      <DeveloperSection />
+    </section>
+
+    <h2 class="section-label"><span class="square" aria-hidden="true"></span>Used by</h2>
+    <section aria-label="Projects using this API">
+      <ProjectsSection />
     </section>
   </main>
 

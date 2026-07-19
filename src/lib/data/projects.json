@@ -1,0 +1,14 @@
+[
+  {
+    "name": "MC-Auth",
+    "description": "Log in with your Minecraft account — easy and secure OAuth2 for Minecraft.",
+    "url": "https://mc-auth.com/",
+    "repo": "https://github.com/Mc-Auth-com/Mc-Auth",
+    "logo": "mc-auth.svg"
+  },
+  {
+    "name": "CherryBread-Network",
+    "description": "German Minecraft server network.",
+    "logo": "cherrybread-network.jpg"
+  }
+]
