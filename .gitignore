@@ -2,5 +2,6 @@
 
 /.svelte-kit/
 /build/
+/coverage/
 
 /.idea/
