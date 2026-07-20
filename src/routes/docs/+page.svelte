@@ -4,6 +4,7 @@
   import SocialMeta from '$lib/components/SocialMeta.svelte';
   import ThemeToggle from '$lib/components/ThemeToggle.svelte';
   import { theme, type Theme } from '$lib/state/theme.svelte';
+  import { docsJsonLd } from '$lib/structuredData';
   import type { Attachment } from 'svelte/attachments';
 
   let ready = $state(false);
@@ -84,6 +85,7 @@
   title="API reference — SpraxAPI"
   description="Interactive API reference for api.sprax.dev — Minecraft profiles, skins, capes, server pings and blocklist data."
   path="/docs"
+  jsonLd={docsJsonLd}
 />
 
 <header class="topbar" bind:clientHeight={headerHeight}>

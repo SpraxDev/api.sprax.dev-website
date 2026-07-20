@@ -49,6 +49,7 @@
     "@vitest/browser-playwright": "^4.1.10",
     "@vitest/coverage-istanbul": "^4.1.10",
     "playwright": "^1.61.1",
+    "schema-dts": "^2.0.0",
     "svelte": "^5.56.6",
     "svelte-check": "^4.7.3",
     "typescript": "^6.0.3",

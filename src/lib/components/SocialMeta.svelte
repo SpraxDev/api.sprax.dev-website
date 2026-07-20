@@ -1,13 +1,18 @@
 <script lang="ts">
+  import { serializeJsonLd } from '$lib/structuredData';
+
   let {
     title,
     description,
-    path
+    path,
+    jsonLd
   }: {
     title: string;
     description: string;
     /** Canonical path of the page, e.g. '/' or '/docs' */
     path: string;
+    /** schema.org JSON-LD graph to embed as a data block */
+    jsonLd?: object;
   } = $props();
 
   const SITE_ORIGIN = 'https://api.sprax.dev';
@@ -32,4 +37,9 @@
 
   <!-- Discord uses this for the embed accent color -->
   <meta name="theme-color" content="#7cb65b" />
+
+  {#if jsonLd}
+    <!-- serializeJsonLd escapes '<'; content is curated -->
+    {@html `<script type="application/ld+json">${serializeJsonLd(jsonLd)}<\/script>`}
+  {/if}
 </svelte:head>

@@ -15,6 +15,7 @@
   import ThemeToggle from '$lib/components/ThemeToggle.svelte';
   import { extractImagePalette } from '$lib/skin-colors';
   import { username } from '$lib/state/username.svelte';
+  import { homeJsonLd } from '$lib/structuredData';
 
   // Skin-lit signature: the current skin's dominant colors drive the page glow.
   let glow = $state.raw<readonly string[]>([]);
@@ -43,6 +44,7 @@
   title="SpraxAPI — Minecraft profiles, skins & blocklist data"
   description="Free public Minecraft REST API: profiles, UUIDs, skin renders, capes, server pings and Mojang blocklist tracking. No API key required."
   path="/"
+  jsonLd={homeJsonLd}
 />
 
 <div class="page" style:--glow-a={glow[0]} style:--glow-b={glow[1]}>
