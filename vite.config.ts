@@ -52,6 +52,8 @@ export default defineConfig({
     projects: [
       {
         extends: './vite.config.ts',
+        // Pre-bundled up front: discovering it mid-run reloads the test
+        optimizeDeps: { include: ['@scalar/api-reference'] },
         test: {
           name: 'client',
           browser: {
