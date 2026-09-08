@@ -4,6 +4,17 @@ import { playwright } from '@vitest/browser-playwright';
 import { defineConfig } from 'vitest/config';
 
 export default defineConfig({
+  // Scalar is Vue-based and we bundle it without @vitejs/plugin-vue, so nobody
+  // injects the compile-time flags Vue's esm-bundler build expects. Left
+  // undefined, Vue patches them onto globalThis at runtime and no branch gets
+  // eliminated.
+  define: {
+    // 'true' matches that runtime fallback; 'false' would need proof no Scalar
+    // dependency uses the Options API
+    __VUE_OPTIONS_API__: 'true',
+    __VUE_PROD_DEVTOOLS__: 'false',
+    __VUE_PROD_HYDRATION_MISMATCH_DETAILS__: 'false',
+  },
   plugins: [
     sveltekit({
       compilerOptions: {
