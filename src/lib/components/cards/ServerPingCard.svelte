@@ -1,11 +1,11 @@
 <script lang="ts">
-  import { serverPingUrl } from '$lib/api';
-  import DebouncedTextInput from '$lib/components/DebouncedTextInput.svelte';
-  import SampleServerChips from '$lib/components/SampleServerChips.svelte';
-  import ShowcaseCard from '$lib/components/ShowcaseCard.svelte';
-  import { initialSampleServer } from '$lib/data/sample-servers';
-  import { parseHostInput } from '$lib/host-input';
-  import { parseMotd, stripLegacyCodes } from '$lib/motd';
+  import { serverPingUrl } from '#lib/api.js';
+  import DebouncedTextInput from '#lib/components/DebouncedTextInput.svelte';
+  import SampleServerChips from '#lib/components/SampleServerChips.svelte';
+  import ShowcaseCard from '#lib/components/ShowcaseCard.svelte';
+  import { initialSampleServer } from '#lib/data/sample-servers.js';
+  import { parseHostInput } from '#lib/host-input.js';
+  import { parseMotd, stripLegacyCodes } from '#lib/motd.js';
   import { onMount } from 'svelte';
 
   interface PingResult {

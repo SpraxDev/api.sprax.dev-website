@@ -1,10 +1,10 @@
 <script lang="ts">
-  import { abridgeStrings } from '$lib/abridge';
-  import { profileUrl } from '$lib/api';
-  import JsonSkeleton, { type SkeletonLine } from '$lib/components/JsonSkeleton.svelte';
-  import ShowcaseCard from '$lib/components/ShowcaseCard.svelte';
-  import { profile } from '$lib/state/profile.svelte';
-  import { username } from '$lib/state/username.svelte';
+  import { abridgeStrings } from '#lib/abridge.js';
+  import { profileUrl } from '#lib/api.js';
+  import JsonSkeleton, { type SkeletonLine } from '#lib/components/JsonSkeleton.svelte';
+  import ShowcaseCard from '#lib/components/ShowcaseCard.svelte';
+  import { profile } from '#lib/state/profile.svelte.js';
+  import { username } from '#lib/state/username.svelte.js';
 
   let expanded = $state(false);
 

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { serializeJsonLd } from '$lib/structuredData';
+  import { serializeJsonLd } from '#lib/structuredData.js';
 
   let {
     title,

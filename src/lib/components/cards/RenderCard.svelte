@@ -1,7 +1,7 @@
 <script lang="ts">
-  import { bodyRenderUrl, headRenderUrl, type RenderParams, skin3dRenderUrl, skinUrl } from '$lib/api';
-  import ShowcaseCard from '$lib/components/ShowcaseCard.svelte';
-  import { username } from '$lib/state/username.svelte';
+  import { bodyRenderUrl, headRenderUrl, type RenderParams, skin3dRenderUrl, skinUrl } from '#lib/api.js';
+  import ShowcaseCard from '#lib/components/ShowcaseCard.svelte';
+  import { username } from '#lib/state/username.svelte.js';
 
   type Variant = 'head' | 'body' | 'skin' | 'body3d' | 'head3d';
 

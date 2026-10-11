@@ -1,8 +1,8 @@
 <script lang="ts">
   import '@fontsource-variable/atkinson-hyperlegible-next/index.css';
-  import '$lib/styles/tokens.css';
-  import '$lib/styles/global.css';
-  import WipNotice from '$lib/components/WipNotice.svelte';
+  import '#lib/styles/tokens.css';
+  import '#lib/styles/global.css';
+  import WipNotice from '#lib/components/WipNotice.svelte';
 
   let { children } = $props();
 </script>

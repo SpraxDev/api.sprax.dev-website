@@ -1,4 +1,4 @@
-import { pickRandomUsername } from '$lib/data/known-usernames';
+import { pickRandomUsername } from '#lib/data/known-usernames.js';
 
 /**
  * Global username state driving every preview card on the page.

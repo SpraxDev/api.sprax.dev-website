@@ -1,10 +1,10 @@
 <script lang="ts">
   import { resolve } from '$app/paths';
-  import SocialMeta from '$lib/components/SocialMeta.svelte';
-  import ThemeToggle from '$lib/components/ThemeToggle.svelte';
-  import { scalarConfig } from '$lib/scalar-config';
-  import { theme } from '$lib/state/theme.svelte';
-  import { docsJsonLd } from '$lib/structuredData';
+  import SocialMeta from '#lib/components/SocialMeta.svelte';
+  import ThemeToggle from '#lib/components/ThemeToggle.svelte';
+  import { scalarConfig } from '#lib/scalar-config.js';
+  import { theme } from '#lib/state/theme.svelte.js';
+  import { docsJsonLd } from '#lib/structuredData.js';
   import type { Attachment } from 'svelte/attachments';
 
   let ready = $state(false);

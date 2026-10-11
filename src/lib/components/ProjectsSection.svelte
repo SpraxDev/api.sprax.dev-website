@@ -1,5 +1,5 @@
 <script lang="ts">
-  import projectsData from '$lib/data/projects.json';
+  import projectsData from '#lib/data/projects.json';
 
   interface Project {
     name: string;
@@ -16,7 +16,7 @@
   // Logos live in the repo and are bundled by Vite — no external image
   // requests, and a renamed/removed file simply renders the card without
   // a logo instead of producing a dead <img>.
-  const logos = import.meta.glob('$lib/assets/projects/*', {
+  const logos = import.meta.glob('#lib/assets/projects/*', {
     eager: true,
     query: '?url',
     import: 'default'

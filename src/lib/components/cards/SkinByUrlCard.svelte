@@ -1,9 +1,9 @@
 <script lang="ts">
-  import { type SkinArea, skinByUrl3dRenderUrl, skinByUrlRenderUrl } from '$lib/api';
-  import DebouncedTextInput from '$lib/components/DebouncedTextInput.svelte';
-  import ShowcaseCard from '$lib/components/ShowcaseCard.svelte';
-  import { extractSkinTextureUrl } from '$lib/profile-textures';
-  import { profile } from '$lib/state/profile.svelte';
+  import { type SkinArea, skinByUrl3dRenderUrl, skinByUrlRenderUrl } from '#lib/api.js';
+  import DebouncedTextInput from '#lib/components/DebouncedTextInput.svelte';
+  import ShowcaseCard from '#lib/components/ShowcaseCard.svelte';
+  import { extractSkinTextureUrl } from '#lib/profile-textures.js';
+  import { profile } from '#lib/state/profile.svelte.js';
 
   // A permanent textures.minecraft.net URL (SpraxDev's skin) so the card is
   // alive before anyone pastes their own.

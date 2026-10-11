@@ -1,21 +1,21 @@
 <script lang="ts">
   import { resolve } from '$app/paths';
-  import { skinUrl } from '$lib/api';
-  import BlocklistCheckCard from '$lib/components/cards/BlocklistCheckCard.svelte';
-  import CapesCard from '$lib/components/cards/CapesCard.svelte';
-  import ProfileCard from '$lib/components/cards/ProfileCard.svelte';
-  import RenderCard from '$lib/components/cards/RenderCard.svelte';
-  import ServerPingCard from '$lib/components/cards/ServerPingCard.svelte';
-  import SkinByUrlCard from '$lib/components/cards/SkinByUrlCard.svelte';
-  import UuidCard from '$lib/components/cards/UuidCard.svelte';
-  import DeveloperSection from '$lib/components/DeveloperSection.svelte';
-  import Hero from '$lib/components/Hero.svelte';
-  import ProjectsSection from '$lib/components/ProjectsSection.svelte';
-  import SocialMeta from '$lib/components/SocialMeta.svelte';
-  import ThemeToggle from '$lib/components/ThemeToggle.svelte';
-  import { extractImagePalette } from '$lib/skin-colors';
-  import { username } from '$lib/state/username.svelte';
-  import { homeJsonLd } from '$lib/structuredData';
+  import { skinUrl } from '#lib/api.js';
+  import BlocklistCheckCard from '#lib/components/cards/BlocklistCheckCard.svelte';
+  import CapesCard from '#lib/components/cards/CapesCard.svelte';
+  import ProfileCard from '#lib/components/cards/ProfileCard.svelte';
+  import RenderCard from '#lib/components/cards/RenderCard.svelte';
+  import ServerPingCard from '#lib/components/cards/ServerPingCard.svelte';
+  import SkinByUrlCard from '#lib/components/cards/SkinByUrlCard.svelte';
+  import UuidCard from '#lib/components/cards/UuidCard.svelte';
+  import DeveloperSection from '#lib/components/DeveloperSection.svelte';
+  import Hero from '#lib/components/Hero.svelte';
+  import ProjectsSection from '#lib/components/ProjectsSection.svelte';
+  import SocialMeta from '#lib/components/SocialMeta.svelte';
+  import ThemeToggle from '#lib/components/ThemeToggle.svelte';
+  import { extractImagePalette } from '#lib/skin-colors.js';
+  import { username } from '#lib/state/username.svelte.js';
+  import { homeJsonLd } from '#lib/structuredData.js';
 
   // Skin-lit signature: the current skin's dominant colors drive the page glow.
   let glow = $state.raw<readonly string[]>([]);

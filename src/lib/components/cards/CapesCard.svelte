@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { CAPE_TYPES } from '$lib/api';
-  import ShowcaseCard from '$lib/components/ShowcaseCard.svelte';
+  import { CAPE_TYPES } from '#lib/api.js';
+  import ShowcaseCard from '#lib/components/ShowcaseCard.svelte';
   import CapePreview from './CapePreview.svelte';
 
   let size = $state(100);

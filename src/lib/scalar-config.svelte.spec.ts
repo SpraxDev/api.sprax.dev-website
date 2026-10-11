@@ -1,8 +1,8 @@
 import { createApiReference } from '@scalar/api-reference';
 import '@scalar/api-reference/style.css';
-import { API_BASE } from '$lib/api';
-import { scalarConfig } from '$lib/scalar-config';
-import type { Theme } from '$lib/state/theme.svelte';
+import { API_BASE } from '#lib/api.js';
+import { scalarConfig } from '#lib/scalar-config.js';
+import type { Theme } from '#lib/state/theme.svelte.js';
 import { afterEach, describe, expect, it } from 'vitest';
 import { page } from 'vitest/browser';
 

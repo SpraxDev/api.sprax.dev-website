@@ -1,6 +1,6 @@
 <script lang="ts">
   import { resolve } from '$app/paths';
-  import { API_BASE } from '$lib/api';
+  import { API_BASE } from '#lib/api.js';
 </script>
 
 <div class="card">

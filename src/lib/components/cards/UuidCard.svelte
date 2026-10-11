@@ -1,8 +1,8 @@
 <script lang="ts">
-  import { uuidUrl } from '$lib/api';
-  import JsonSkeleton, { type SkeletonLine } from '$lib/components/JsonSkeleton.svelte';
-  import ShowcaseCard from '$lib/components/ShowcaseCard.svelte';
-  import { username } from '$lib/state/username.svelte';
+  import { uuidUrl } from '#lib/api.js';
+  import JsonSkeleton, { type SkeletonLine } from '#lib/components/JsonSkeleton.svelte';
+  import ShowcaseCard from '#lib/components/ShowcaseCard.svelte';
+  import { username } from '#lib/state/username.svelte.js';
 
   // Mirrors the known response shape: { "id": "<32 hex>", "name": "..." }
   const SKELETON_LINES: SkeletonLine[] = [

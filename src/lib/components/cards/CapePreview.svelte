@@ -1,7 +1,7 @@
 <script lang="ts">
-  import { capeRenderUrl, type CapeType, capeUrl } from '$lib/api';
-  import RequestUrl from '$lib/components/RequestUrl.svelte';
-  import { username } from '$lib/state/username.svelte';
+  import { capeRenderUrl, type CapeType, capeUrl } from '#lib/api.js';
+  import RequestUrl from '#lib/components/RequestUrl.svelte';
+  import { username } from '#lib/state/username.svelte.js';
 
   let { type, size = 100 }: { type: CapeType; size?: number } = $props();
 

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { SAMPLE_SERVERS } from '$lib/data/sample-servers';
+  import { SAMPLE_SERVERS } from '#lib/data/sample-servers.js';
 
   let { value = $bindable() }: { value: string } = $props();
 </script>

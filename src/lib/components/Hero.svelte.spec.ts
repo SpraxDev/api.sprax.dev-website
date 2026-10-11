@@ -1,5 +1,5 @@
-import { KNOWN_USERNAMES } from '$lib/data/known-usernames';
-import { username } from '$lib/state/username.svelte';
+import { KNOWN_USERNAMES } from '#lib/data/known-usernames.js';
+import { username } from '#lib/state/username.svelte.js';
 import { beforeEach, describe, expect, it } from 'vitest';
 import { render } from 'vitest-browser-svelte';
 import { page, userEvent } from 'vitest/browser';

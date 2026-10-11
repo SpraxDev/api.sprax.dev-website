@@ -1,5 +1,5 @@
-import { API_BASE } from '$lib/api';
-import type { Theme } from '$lib/state/theme.svelte';
+import { API_BASE } from '#lib/api.js';
+import type { Theme } from '#lib/state/theme.svelte.js';
 
 /** Config for the `@scalar/api-reference` instance on the docs page. */
 export function scalarConfig(effectiveTheme: Theme) {

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { theme } from '$lib/state/theme.svelte';
+  import { theme } from '#lib/state/theme.svelte.js';
   import { onMount } from 'svelte';
 
   onMount(() => theme.init());

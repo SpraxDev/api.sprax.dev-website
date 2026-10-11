@@ -1,4 +1,4 @@
-import { profileUrl } from '$lib/api';
+import { profileUrl } from '#lib/api.js';
 import { username } from './username.svelte';
 
 async function fetchProfile(name: string): Promise<unknown> {
