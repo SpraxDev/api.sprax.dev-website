@@ -87,7 +87,7 @@ describe('scalarConfig', () => {
     // Matched on the visible labels: Scalar renders these as plain buttons
     // whose accessible name getByRole doesn't resolve. Each label is what the
     // commented flag removes, confirmed by re-rendering with it dropped.
-    for (const label of ['Ask AI', 'VS Code', 'Cursor', 'Developer Tools', 'Configure', 'Share', 'Deploy']) {
+    for (const label of ['Ask AI', 'VS Code', 'Cursor', 'Developer Tools', 'Configure', 'Share', 'Deploy', 'Generate SDK']) {
       expect(page.getByText(label, { exact: true }).elements(), label).toHaveLength(0);
     }
 
